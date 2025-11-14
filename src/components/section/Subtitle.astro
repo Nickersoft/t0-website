@@ -1,0 +1,9 @@
+---
+import { Typography, type TypographyProps } from "@/components/ui/Typography";
+
+type Props = TypographyProps;
+---
+
+<Typography color="secondary" variant="body" size="lg" {...Astro.props}>
+  <slot />
+</Typography>

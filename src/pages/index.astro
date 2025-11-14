@@ -1,15 +1,49 @@
 ---
 import { Typography } from "@/components/ui/Typography";
+import { ChevronRight } from "@/icons";
+
+import Tether from "@/assets/svg/tether.svg";
 
 import PageLayout from "@/layouts/PageLayout.astro";
+
+import * as Section from "@/components/section";
+import * as Hero from "@/components/home/hero";
+import FeatureCard from "@/components/FeatureCard.astro";
 ---
 
 <PageLayout title="Home">
-  <Typography
-    variant="display"
-    size="lg"
-    className="animate-in fade-in duration-10000"
-  >
-    Hero text
-  </Typography>
+  <Hero.Root>
+    <Hero.Title>Money without borders</Hero.Title>
+    <Hero.Subtitle>
+      Move money instantly, at low cost, with the world’s most liquid stablecoin
+      settlement network. Built for institutions. Powered by USDT.
+    </Hero.Subtitle>
+    <Hero.Action>
+      Access the network
+      <ChevronRight />
+    </Hero.Action>
+    <Hero.Subline>
+      Backed by <Tether />
+    </Hero.Subline>
+  </Hero.Root>
+
+  <!-- FEATURES -->
+
+  <Section.Root>
+    <Section.Header>
+      <Section.Title> The network for global money movement</Section.Title>
+      <Section.Subtitle>
+        t-0 connects licensed financial institutions through a single
+        integration, using stablecoin liquidity and net settlement to make
+        cross-border transfers faster, cheaper, and more efficient than legacy
+        rails.
+      </Section.Subtitle>
+    </Section.Header>
+
+    <div class="grid grid-cols-4">
+      <FeatureCard />
+      <FeatureCard />
+      <FeatureCard />
+    </div>
+  </Section.Root>
 </PageLayout>

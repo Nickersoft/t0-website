@@ -7,7 +7,7 @@ import { type VariantProps, cva } from "class-variance-authority";
 export const typographyVariants = cva("", {
   variants: {
     variant: {
-      display: "font-display font-medium",
+      display: "font-display font-normal",
       headline: "font-display",
       title: "font-sans font-bold",
       body: "font-sans font-normal",
@@ -25,13 +25,12 @@ export const typographyVariants = cva("", {
     },
     color: {
       success: "text-success",
-      danger: "text-danger",
-      warn: "text-warn",
+      destructive: "text-destructive",
+      warning: "text-warning",
       primary: "text-primary",
-      default: "text-default",
-      subtle: "text-subtle",
-      muted: "text-muted",
-      invert: "text-invert",
+      default: "text-foreground",
+      secondary: "text-secondary-foreground",
+      muted: "text-muted-foreground",
       inherit: "text-inherit",
     },
   },
