@@ -1,0 +1,16 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.configPath": ".prettierrc.mjs",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "bun.runtime": "/Users/tjnickerson/.local/share/mise/shims/bun",
+  "debug.javascript.defaultRuntimeExecutable": {
+    "pwa-node": "/Users/tjnickerson/.local/share/mise/shims/node"
+  },
+  "python.defaultInterpreterPath": "/Users/tjnickerson/.local/share/mise/installs/python/3.14.0/bin/python"
+}
