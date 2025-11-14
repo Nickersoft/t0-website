@@ -40,7 +40,30 @@ import FeatureCard from "@/components/FeatureCard.astro";
       </Section.Subtitle>
     </Section.Header>
 
-    <div class="grid grid-cols-4">
+    <div class="grid grid-cols-4 gap-x-6">
+      <FeatureCard />
+      <FeatureCard />
+      <FeatureCard />
+      <FeatureCard />
+    </div>
+  </Section.Root>
+
+  <!-- Comparison -->
+
+  <Section.Root>
+    <Section.Header>
+      <Section.Title>
+        A <em>swifter</em> way to move money
+      </Section.Title>
+      <Section.Subtitle>
+        Traditional cross-border payments are slowed by legacy infrastructure,
+        creating unnecessary cost and complexity. t-0 network provides a direct,
+        programmable, and more efficient path for money movement.
+      </Section.Subtitle>
+    </Section.Header>
+
+    <div class="grid grid-cols-4 gap-6">
+      <FeatureCard />
       <FeatureCard />
       <FeatureCard />
       <FeatureCard />

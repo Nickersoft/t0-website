@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { typographyVariants } from "./Typography";
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -21,11 +22,7 @@ const CardHeader = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-6", className)}
-    {...props}
-  />
+  <div ref={ref} className={cn("flex flex-col p-6", className)} {...props} />
 ));
 CardHeader.displayName = "CardHeader";
 
@@ -35,7 +32,10 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("leading-none font-semibold tracking-tight", className)}
+    className={cn(
+      typographyVariants({ variant: "title", size: "md" }),
+      className,
+    )}
     {...props}
   />
 ));
@@ -47,7 +47,10 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("text-muted-foreground text-sm", className)}
+    className={cn(
+      typographyVariants({ color: "muted", variant: "body", size: "md" }),
+      className,
+    )}
     {...props}
   />
 ));
