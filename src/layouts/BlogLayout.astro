@@ -20,21 +20,21 @@ const authors = await getEntries(Astro.props.authors);
   <main>
     <article class="mx-auto max-w-3xl px-8 py-32">
       <div
-        class="flex flex-row items-center justify-start gap-4 overflow-scroll pt-8 text-sm font-medium text-muted"
+        class="text-muted flex flex-row items-center justify-start gap-4 overflow-scroll pt-8 text-sm font-medium"
       >
-        <a class="whitespace-nowrap hover:text-subtle" href="/blog">
+        <a class="hover:text-subtle whitespace-nowrap" href="/blog">
           {BLOG_TITLE}
         </a>
         /
-        <a class="whitespace-nowrap text-primary" href={`/blog/${slug}`}>
+        <a class="text-primary whitespace-nowrap" href={`/blog/${slug}`}>
           {title}
         </a>
       </div>
       <div
-        class="prose prose-base max-w-none py-8 text prose-headings:font-semibold prose-h1:mt-8 prose-h1:text-3xl prose-img:mx-auto prose-img:rounded-lg prose-hr:mb-8"
+        class="prose prose-base text prose-headings:font-semibold prose-h1:mt-8 prose-h1:text-3xl prose-img:mx-auto prose-img:rounded-lg prose-hr:mb-8 max-w-none py-8"
       >
         <div class="title">
-          <Typography variant="label" size="lg" color="subtle">
+          <Typography variant="label" size="lg" color="secondary">
             <FormattedDate date={date} />
           </Typography>
 
@@ -59,7 +59,7 @@ const authors = await getEntries(Astro.props.authors);
               variant="body"
               className="font-medium"
               size="md"
-              color="subtle"
+              color="secondary"
             >
               <FormattedAuthors includeLinks authors={authors} />
             </Typography>

@@ -7,7 +7,7 @@ import { type VariantProps, cva } from "class-variance-authority";
 export const typographyVariants = cva("", {
   variants: {
     variant: {
-      display: "font-display font-normal",
+      display: "font-display tracking-tight font-normal",
       headline: "font-display",
       title: "font-sans font-medium",
       body: "font-sans font-normal",

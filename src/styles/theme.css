@@ -19,7 +19,7 @@
   --primary: var(--color-green-700);
   --primary-foreground: var(--color-green-50);
   --secondary: var(--color-gray-200);
-  --secondary-foreground: var(--color-gray-700);
+  --secondary-foreground: var(--color-gray-600);
   --muted: var(--color-gray-300);
   --muted-foreground: var(--color-gray-600);
   --accent: var(--color-gray-100);

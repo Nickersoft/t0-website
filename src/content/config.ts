@@ -26,7 +26,16 @@ const blog = defineCollection({
     }),
 });
 
+const faq = defineCollection({
+  loader: glob({ pattern: "*.{mdx,md}", base: "src/data/faq" }),
+  schema: ({ image }) =>
+    z.object({
+      question: z.string(),
+    }),
+});
+
 export const collections = {
   authors,
+  faq,
   blog,
 };
