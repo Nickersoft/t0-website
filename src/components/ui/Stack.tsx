@@ -37,6 +37,7 @@ const stackVariants = cva("flex", {
     },
     gap: {
       none: "",
+      xs: "gap-1",
       sm: "gap-2",
       md: "gap-4",
       lg: "gap-8",

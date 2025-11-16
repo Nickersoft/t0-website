@@ -1,0 +1,31 @@
+---
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/Card";
+import { Separator } from "./ui/Separator";
+
+interface Props extends React.ComponentPropsWithoutRef<typeof Card> {
+  title: string;
+  totalTime: string;
+}
+
+const { title, totalTime, ...props } = Astro.props;
+---
+
+<Card variant="outline" size="lg" {...props}>
+  <CardHeader className="flex w-full flex-row items-end justify-between">
+    <CardTitle variant="headline" size="sm">{title}</CardTitle>
+    <CardDescription variant="headline" size="md">{totalTime}</CardDescription>
+  </CardHeader>
+
+  <CardContent>
+    <Separator
+      className="group-data-[variant=primary]/card:bg-primary-foreground/10 my-6"
+    />
+    <slot />
+  </CardContent>
+</Card>

@@ -85,69 +85,62 @@ const gridVariants = cva("grid", {
   },
 });
 
-interface GridProps
-  extends React.HTMLAttributes<HTMLElement>,
-    Omit<VariantProps<typeof gridVariants>, "columns" | "rows"> {
-  asChild?: boolean;
-  columns?: string | number | "auto-fit" | "auto-fill";
-  rows?: string | number | "auto-fit" | "auto-fill";
-  minWidth?: number;
-  minHeight?: number;
-}
-
 function resolve(v?: string | number, min: number = 0) {
   return v === "auto-fit" || v === "auto-fill" || typeof v === "number"
     ? `repeat(${v}, minmax(${px(min)}, 1fr))`
     : v;
 }
 
-const Grid = React.forwardRef<HTMLDivElement, GridProps>(
-  (
-    {
-      alignCells,
-      alignItems,
-      asChild,
-      justifyCells,
-      columns,
-      rows,
-      justifyItems,
-      className,
-      gap,
-      minHeight,
-      minWidth,
-      children,
-      ...props
-    },
-    ref,
-  ) => {
-    const Component = asChild ? Slot : "div";
+type GridProps = React.ComponentProps<"div"> &
+  Omit<VariantProps<typeof gridVariants>, "columns" | "rows"> & {
+    asChild?: boolean;
+    columns?: string | number | "auto-fit" | "auto-fill";
+    rows?: string | number | "auto-fit" | "auto-fill";
+    minWidth?: number;
+    minHeight?: number;
+  };
 
-    return (
-      <Component
-        {...props}
-        ref={ref}
-        style={cssVars({
-          columns: resolve(columns, minWidth),
-          rows: resolve(rows, minHeight),
-        })}
-        className={cn(
-          gridVariants({
-            alignCells,
-            columns: columns !== undefined,
-            rows: rows !== undefined,
-            alignItems,
-            justifyCells,
-            justifyItems,
-            gap,
-          }),
-          className,
-        )}
-      >
-        {children}
-      </Component>
-    );
-  },
-);
+function Grid({
+  alignCells,
+  alignItems,
+  asChild,
+  justifyCells,
+  columns,
+  rows,
+  justifyItems,
+  className,
+  gap,
+  minHeight,
+  minWidth,
+  children,
+  ...props
+}: GridProps) {
+  const Component = asChild ? Slot : "div";
+
+  return (
+    <Component
+      {...props}
+      style={cssVars({
+        columns: resolve(columns, minWidth),
+        rows: resolve(rows, minHeight),
+      })}
+      className={cn(
+        gridVariants({
+          alignCells,
+          columns: columns !== undefined,
+          rows: rows !== undefined,
+          alignItems,
+          justifyCells,
+          justifyItems,
+          gap,
+        }),
+        className,
+      )}
+    >
+      {children}
+    </Component>
+  );
+}
 
 Grid.displayName = "Grid";
 

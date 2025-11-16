@@ -83,7 +83,7 @@ export function SectionTitle({
     <Typography
       variant="display"
       size="md"
-      className={cn("text-balance", className)}
+      className={cn("[text-align:inherit] text-balance", className)}
       {...props}
     >
       {children}
@@ -99,7 +99,7 @@ export function SectionSubtitle({
   return (
     <Typography
       color="secondary"
-      className={cn("max-w-3xl", className)}
+      className={cn("max-w-4xl [text-align:inherit]", className)}
       variant="body"
       size="lg"
       {...props}
