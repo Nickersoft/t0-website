@@ -15,9 +15,12 @@ export function FAQ({ questions }: FAQProps) {
     <Accordion type="single">
       {questions.map((question) => (
         <AccordionItem value={question.id} key={question.id}>
-          <AccordionTrigger>{question.data.question}</AccordionTrigger>
+          <AccordionTrigger className="text-lg">
+            {question.data.question}
+          </AccordionTrigger>
           <AccordionContent>
             <div
+              className="text-base"
               dangerouslySetInnerHTML={{
                 __html: question.rendered?.html ?? "",
               }}

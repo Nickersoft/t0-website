@@ -1,26 +1,29 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 
 import { ChevronRight } from "@/icons";
 
+// Icons
+import { LockKeyOpenIcon } from "@phosphor-icons/react";
+
+// SVG Assets
 import Tether from "@/assets/svg/tether.svg";
 import Bank from "@/assets/svg/iso/bank.svg";
 import CC from "@/assets/svg/iso/cc.svg";
 import Pipeline from "@/assets/svg/iso/pipeline.svg";
 
-import PageLayout from "@/layouts/PageLayout.astro";
-
+// PNG Assets
 import markets from "@/assets/png/markets.png";
 import transfers from "@/assets/png/global-transfers.png";
 import revenue from "@/assets/png/new-revenue.png";
+import quote from "@/assets/png/quote.png";
 import fx from "@/assets/png/fx-cost.png";
 
-import * as Hero from "@/components/home/hero";
+import PageLayout from "@/layouts/PageLayout.astro";
 
-import quote from "@/assets/png/quote.png";
-
+// UI Components
 import { Blockquote, BlockquoteAuthor } from "@/components/ui/Blockquote";
-
 import {
   Card,
   CardDescription,
@@ -48,29 +51,58 @@ import {
   SectionTitle,
 } from "@/components/ui/Section";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/Accordion";
-import { getCollection } from "astro:content";
-import { FAQ } from "@/components/ui/FAQ";
-import TimelineCard from "@/components/TimelineCard.astro";
-import {
   Timeline,
   TimelineItem,
   TimelineItemLabel,
   TimelineItemTitle,
 } from "@/components/ui/Timeline";
 
+// Site Components
+import { FAQ } from "@/components/FAQ";
+
+import TimelineCard from "@/components/TimelineCard.astro";
+import { Typography } from "@/components/ui/Typography";
+import { getCurrency } from "@/lib/currency";
+import { ProgressiveBlur } from "@/components/ui/ProgressiveBlur";
+
+import HomepageHero from "@/components/HomepageHero.astro";
+
 const faq = await getCollection("faq");
+
+const CURRENCIES = [
+  "USD",
+  "EUR",
+  "CNY",
+  "JPY",
+  "HKD",
+  "SGD",
+  "AED",
+  "INR",
+  "HKD",
+  "SGD",
+  "MXN",
+  "BRL",
+  "ARS",
+  "COP",
+  "PEN",
+  "KES",
+  "ZAR",
+  "NGN",
+  "XOF",
+  "XAF",
+  "PHP",
+  "VND",
+  "IDR",
+]
+  .map(getCurrency)
+  .filter(Boolean);
 ---
 
 <PageLayout title="Home">
   <!------------------------------------ HERO ------------------------------------>
 
-  <Section variant="accented" className="bg-primary">
-    <SectionHeader>
+  <HomepageHero>
+    <SectionHeader className="relative z-10 py-40">
       <SectionTitle
         className="dark"
         variant="display"
@@ -80,23 +112,26 @@ const faq = await getCollection("faq");
         Money without borders
       </SectionTitle>
       <SectionSubtitle
-        className="dark"
+        className="dark max-w-2xl text-balance"
         variant="body"
         size="lg"
         color="primary"
       >
-        Move money instantly, at low cost, with the world’s most liquid
+        Move money instantly, at low cost, with the world's most liquid
         stablecoin settlement network. Built for institutions. Powered by USDT.
       </SectionSubtitle>
-      <Hero.Action>
+      <Link variant="default" className="dark my-8 bg-sky-300 text-sky-900!">
         Access the network
         <ChevronRight />
-      </Hero.Action>
-      <Hero.Subline>
+      </Link>
+      <Typography
+        variant="body"
+        className="text-primary-foreground flex flex-row items-center justify-center gap-2 opacity-75"
+      >
         Backed by <Tether />
-      </Hero.Subline>
+      </Typography>
     </SectionHeader>
-  </Section>
+  </HomepageHero>
 
   <!---------------------------------- FEATURES ---------------------------------->
 
@@ -232,7 +267,7 @@ const faq = await getCollection("faq");
           </TimelineItem>
         </Timeline>
       </TimelineCard>
-      <TimelineCard variant="primary" title="t-0 Card" totalTime="< 1 hr">
+      <TimelineCard variant="primary" title="t-0 Network" totalTime="< 1 hr">
         <Timeline client:load variant="primary" className="dark">
           <TimelineItem>
             <TimelineItemLabel>~0.2 milliseconds</TimelineItemLabel>
@@ -382,8 +417,8 @@ const faq = await getCollection("faq");
         <blockquote>
           USDT has become the world’s leading stablecoin because it solves real
           problems. Our investment makes T-0 the first network to prioritise
-          USDT liquidity for real-world settlement - <strong
-            >bringing compliant, programmable cross-border payments to
+          USDT liquidity for real-world settlement - <strong>
+            bringing compliant, programmable cross-border payments to
             institutions, especially in emerging markets where stable, efficient
             infrastructure matters most.
           </strong>
@@ -393,7 +428,9 @@ const faq = await getCollection("faq");
     </Stack>
   </Section>
 
-  <Section>
+  <!--------------------------------- CURRENCIES --------------------------------->
+
+  <Section className="mx-auto max-w-5xl">
     <SectionHeader>
       <SectionTitle> Seamless movement between 1,200+ FX pairs </SectionTitle>
       <SectionSubtitle>
@@ -402,6 +439,41 @@ const faq = await getCollection("faq");
         corridors for instant, low cost payments.
       </SectionSubtitle>
     </SectionHeader>
+
+    <div class="relative w-full">
+      <ProgressiveBlur
+        blurLevels={[0, 1, 2, 4, 8, 12]}
+        height="100%"
+        className="absolute top-0 bottom-0 left-1/2 w-screen -translate-x-1/2"
+      />
+
+      <Link
+        variant="default"
+        size="lg"
+        className="absolute bottom-16 left-1/2 z-30 -translate-x-1/2"
+      >
+        <LockKeyOpenIcon weight="fill" />
+        Unlock all currencies
+      </Link>
+
+      <Grid columns={3} className="relative w-full mask-b-to-transparent pb-16">
+        {
+          CURRENCIES.map(({ flag: Flag, ...currency }) => (
+            <Stack orientation="row" align="center" className="p-4 w-full">
+              <Flag className="size-10 rounded-full" />
+              <div>
+                <Typography variant="title" size="md">
+                  {currency.currencyCode}
+                </Typography>
+                <Typography variant="body" size="md" color="secondary">
+                  {currency.name}
+                </Typography>
+              </div>
+            </Stack>
+          ))
+        }
+      </Grid>
+    </div>
   </Section>
 
   <Section layout="horizontal">

@@ -1,0 +1,88 @@
+---
+import { DottedMap, type Connection } from "./ui/DottedMap";
+import { Grid } from "./ui/Grid";
+
+const leftConnections: Connection[] = [
+  {
+    start: { lat: 39.9075, lng: 116.3972 }, // Beijing, China
+    end: { lat: -37.814, lng: 144.9633 }, // Melbourne, Australia
+  },
+  {
+    start: { lat: 39.9075, lng: 116.3972 }, // Beijing, China
+    end: { lat: -6.2, lng: 106.816666 }, // Jakarta, Indonesia
+  },
+  {
+    start: { lat: 35.6895, lng: 139.6917 }, // Tokyo, Japan
+    end: { lat: 39.9075, lng: 116.3972 }, // Beijing, China
+  },
+  {
+    start: { lat: 35.6895, lng: 139.6917 }, // Tokyo, Japan
+    end: { lat: 52.0317, lng: 113.5009 }, // Chita, Russia
+  },
+  {
+    start: { lat: 48.857548, lng: 2.351377 }, // Paris, France
+    end: { lat: -6.2, lng: 106.816666 }, // Jakarta, Indonesia
+  },
+];
+
+const rightConnections: Connection[] = [
+  {
+    start: { lat: 19.432608, lng: -99.133208 }, // Mexico City, Mexico
+    end: { lat: -25.26374, lng: -57.575926 }, // Asuncion, Paraguay
+  },
+  {
+    start: { lat: 45.501887, lng: -73.567392 }, // Montreal, Canada
+    end: { lat: 19.432608, lng: -99.133208 }, // Mexico City, Mexico
+  },
+  {
+    start: { lat: 34.054908, lng: -118.3286614 }, // Los Angeles, CA USA
+    end: { lat: 19.432608, lng: -99.133208 }, // Mexico City, Mexico
+  },
+  {
+    start: { lat: 61.217576, lng: -149.899678 }, // Anchorage, Alaska USA
+    end: { lat: 45.501887, lng: -73.567392 }, // Montreal, Canada
+  },
+];
+---
+
+<div
+  class="@container-[size] relative h-150 overflow-hidden bg-linear-to-b from-green-800 to-green-700 [clip-path:polygon(0_0%,100%_0,100%_97%,0%_100%)]"
+>
+  <Grid columns="1fr auto 1fr" className="max-md:grid-cols-1">
+    <!-- Left Map -->
+    <div
+      class="relative size-full max-md:absolute max-md:top-0 max-md:left-1/2 max-md:z-1 max-md:-translate-x-1/2 max-md:opacity-10"
+    >
+      <div
+        class="pointer-events-none absolute top-4 right-0 bottom-0 aspect-[2] h-[100cqh] -translate-x-4"
+      >
+        <DottedMap
+          client:load
+          mapSamples={4000}
+          className="text-primary-foreground/30"
+          dotRadius={0.5}
+          lineColor="#ffffff"
+          connections={leftConnections}
+        />
+      </div>
+    </div>
+
+    <slot />
+
+    <!-- Right Map -->
+    <div class="relative size-full">
+      <div
+        class="pointer-events-none absolute top-4 bottom-0 left-0 aspect-[2] h-[100cqh] -translate-x-16 max-md:hidden"
+      >
+        <DottedMap
+          client:load
+          mapSamples={4000}
+          className="text-primary-foreground/30"
+          dotRadius={0.5}
+          lineColor="#ffffff"
+          connections={rightConnections}
+        />
+      </div>
+    </div>
+  </Grid>
+</div>

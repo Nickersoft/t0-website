@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Stack } from "./Stack";
-import { Typography, type TypographyProps } from "./Typography";
+import { Typography } from "./Typography";
 
 import { Path } from "svg-pathgen";
 import { animate, stagger, useInView, type Segment } from "motion/react";
