@@ -40,7 +40,7 @@ export function DottedMap({
       height,
       mapSamples,
     });
-
+    console.log("caleled", width, height, mapSamples, connections);
     const markers = addMarkers(
       connections.flatMap(({ end, start }) => [start, end]),
     );
@@ -121,8 +121,6 @@ export function DottedMap({
 
     resizeObserver.observe(container);
 
-    animate(container, { opacity: 1 }, { duration: 0.4 });
-
     return () => resizeObserver.disconnect();
   }, [width, height, mapData.points, dotColor, dotRadius]);
 
@@ -147,7 +145,7 @@ export function DottedMap({
     <div
       ref={containerRef}
       className={cn(
-        "relative size-full transform-gpu opacity-0 will-change-transform",
+        "relative size-full transform-gpu will-change-transform",
         className,
       )}
     >

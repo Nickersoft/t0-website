@@ -33,8 +33,19 @@ const faq = defineCollection({
   }),
 });
 
+const team = defineCollection({
+  loader: glob({ pattern: "*.yml", base: "src/data/team" }),
+  schema: ({ image }) =>
+    z.object({
+      image: image(),
+      name: z.string(),
+      title: z.string(),
+    }),
+});
+
 export const collections = {
   authors,
   faq,
   blog,
+  team,
 };

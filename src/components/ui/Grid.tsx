@@ -7,6 +7,10 @@ import { px } from "@/lib/units";
 
 const gridVariants = cva("grid", {
   variants: {
+    container: {
+      true: "container",
+      false: "",
+    },
     columns: {
       true: "grid-cols-(--columns)",
       false: "",
@@ -77,6 +81,7 @@ const gridVariants = cva("grid", {
   ],
   defaultVariants: {
     flow: "row",
+    container: false,
     alignItems: "start",
     justifyItems: "start",
     alignCells: "normal",
@@ -112,6 +117,7 @@ function Grid({
   gap,
   minHeight,
   minWidth,
+  container,
   children,
   ...props
 }: GridProps) {
@@ -126,6 +132,7 @@ function Grid({
       })}
       className={cn(
         gridVariants({
+          container,
           alignCells,
           columns: columns !== undefined,
           rows: rows !== undefined,

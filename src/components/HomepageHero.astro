@@ -1,7 +1,6 @@
 ---
-import { Image } from "astro:assets";
-
-import { DottedMap, type Connection } from "./ui/DottedMap";
+import { type Connection } from "./ui/DottedMap";
+import DottedMap from "./ui/DottedMap.astro";
 import { Grid } from "./ui/Grid";
 
 import noise from "@/assets/png/noise.png?inline";
@@ -69,9 +68,8 @@ const rightConnections: Connection[] = [
         class="pointer-events-none absolute top-4 right-0 bottom-0 aspect-[2] h-[100cqh] -translate-x-4"
       >
         <DottedMap
-          client:load
           mapSamples={4000}
-          className="text-primary-foreground/30"
+          class="text-primary-foreground/30"
           dotRadius={0.5}
           lineColor="#ffffff"
           connections={leftConnections}
@@ -87,9 +85,8 @@ const rightConnections: Connection[] = [
         class="pointer-events-none absolute top-4 bottom-0 left-0 aspect-[2] h-[100cqh] -translate-x-16 max-md:hidden"
       >
         <DottedMap
-          client:load
           mapSamples={4000}
-          className="text-primary-foreground/30"
+          class="text-primary-foreground/30"
           dotRadius={0.5}
           lineColor="#ffffff"
           connections={rightConnections}

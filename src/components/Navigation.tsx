@@ -35,7 +35,9 @@ export function Navigation() {
           style={{ height }}
           className="container py-8"
         >
-          <Logo className="h-24 w-32" />
+          <a href="/">
+            <Logo className="h-24 w-32" />
+          </a>
 
           <Stack orientation="row" align="center" gap="md">
             <ul className="flex flex-row gap-2 text-sm font-medium">

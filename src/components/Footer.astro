@@ -1,6 +1,5 @@
 ---
-import { useIsScrolling } from "@/hooks/useIsScrolling";
-import { Button, buttonVariants } from "./ui/Button";
+import { buttonVariants } from "./ui/Button";
 import { Stack } from "./ui/Stack";
 
 import Logo from "~icons/assets/t0";
@@ -22,36 +21,43 @@ const links = [
 ---
 
 <footer class="container py-8">
-  <Stack orientation="row" justify="between" align="center" className="mb-48">
-    <Stack orientation="row" align="center" className="h-8">
-      <Logo className="h-24 w-32" />
+  <Stack
+    orientation="row"
+    justify="between"
+    align="center"
+    className="mb-48 whitespace-nowrap max-md:w-full max-md:flex-col max-md:items-start"
+  >
+    <Stack orientation="row" align="center" className="h-8 max-md:mb-12">
+      <Logo className="h-8 w-32" />
       <Separator orientation="vertical" />
       <Typography variant="body" size="md" color="muted">
         Money without borders
       </Typography>
     </Stack>
 
-    <Stack orientation="row" align="center" gap="md">
-      <ul class="flex flex-row gap-2 text-sm font-medium">
-        {
-          links.map((link) => (
-            <li>
-              <a
-                class={cn(
-                  buttonVariants({ variant: "link" }),
-                  "text-muted-foreground hover:text-secondary-foreground",
-                )}
-                href={link.href}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
+    <ul
+      class="flex flex-row gap-2 text-sm font-medium max-md:-ml-4 max-md:flex-col"
+    >
+      {
+        links.map((link) => (
+          <li>
+            <a
+              class={cn(
+                buttonVariants({ variant: "link" }),
+                "text-muted-foreground hover:text-secondary-foreground",
+              )}
+              href={link.href}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
 
-      <Link variant="ghost">Access network</Link>
-    </Stack>
+      <li>
+        <Link variant="ghost">Access network</Link>
+      </li>
+    </ul>
   </Stack>
 
   <Typography variant="body" size="sm" color="muted" className="opacity-75">

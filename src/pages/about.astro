@@ -1,5 +1,211 @@
 ---
+/* ---------------------------------- Logos --------------------------------- */
+
+import Lloyds from "@/assets/svg/lloyds.svg";
+import DBG from "@/assets/svg/dbg.svg";
+import GoldmanSachs from "@/assets/svg/gs.svg";
+import Barclays from "@/assets/svg/barclays.svg";
+import Tether from "@/assets/svg/tether.svg";
+import Delphi from "@/assets/svg/delphi.svg";
+
+/* ------------------------------- Components ------------------------------- */
+
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
+import { Grid } from "@/components/ui/Grid";
+import {
+  Section,
+  SectionHeader,
+  SectionDescription,
+  SectionTitle,
+} from "@/components/ui/Section";
+import { Stack } from "@/components/ui/Stack";
+import { Typography } from "@/components/ui/Typography";
+
+/* ---------------------------------- Icons --------------------------------- */
+
+import { GlobeDuotone, LightningDuotone, NetworkDuotone } from "@/icons";
+
+/* --------------------------------- Layout --------------------------------- */
+
 import LegalLayout from "@/layouts/LegalLayout.astro";
+
+/* ---------------------------------- Team ---------------------------------- */
+
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+const team = await getCollection("team");
 ---
 
-<LegalLayout title="About Us"> he </LegalLayout>
+<LegalLayout title="About Us">
+  <Grid
+    columns="200px auto"
+    gap="none"
+    className="container mt-16 *:size-full *:border-b *:px-1 *:py-16 max-md:grid-cols-1 max-md:*:odd:border-b-0 max-md:*:odd:pb-0 max-md:*:even:pt-8"
+  >
+    <!----------------------------------- MISSION ---------------------------------->
+
+    <Typography variant="headline" size="md"> Mission </Typography>
+
+    <Typography variant="body" size="lg" color="secondary">
+      <strong>
+        We're our a mission unlock a world of borderless economic connection.
+      </strong> t-0 Network is building the financial infrastructure of a borderless
+      world, connecting banks, fintechs, and payment providers through seamless,
+      programmable money movement.
+    </Typography>
+
+    <!----------------------------------- COMPANY ---------------------------------->
+
+    <Typography variant="headline" size="md"> Company </Typography>
+
+    <Typography variant="body" size="lg" color="secondary">
+      <strong>
+        t-0 is the institutional settlement layer for stablecoin-powered
+        payments.
+      </strong> We connect licensed financial institutions through a single integration,
+      using USDT liquidity and patented net-settlement technology to simplify cross-border
+      transfers. Our system makes global payments feel local by enabling fast, programmable
+      value movement between developed and emerging markets.
+    </Typography>
+  </Grid>
+
+  <!--------------------------------- TECHNOLOGY --------------------------------->
+
+  <Section className="flex flex-col items-start pb-12" container>
+    <SectionHeader align="left" className="px-1">
+      <SectionTitle>Technology</SectionTitle>
+      <SectionDescription>
+        We designed t-0 from the ground-up to be the most efficient way for
+        financial institutions to execute global correspondent payments. Our
+        unique patent pending system brings together the best of traditional FX
+        trading infrastructure and stablecoin infrastructure:
+      </SectionDescription>
+    </SectionHeader>
+
+    <Grid
+      columns={3}
+      justifyItems="stretch"
+      alignItems="stretch"
+      className="[&_svg]:text-primary w-full max-md:grid-cols-1 [&_svg]:mb-4 [&_svg]:size-8"
+    >
+      <Card>
+        <CardHeader>
+          <LightningDuotone />
+          <CardTitle> Real-time order book </CardTitle>
+          <CardDescription>
+            Instant, transparent matching for pay-in and pay-out quotes,
+            ensuring efficient pricing and seamless transaction execution
+            between institutions.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+      <Card>
+        <CardHeader>
+          <NetworkDuotone />
+          <CardTitle> Payment orchestration </CardTitle>
+          <CardDescription>
+            Continuous connection for the secure and compliant sharing of
+            payment and Travel Rule information between participating
+            institutions.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+      <Card>
+        <CardHeader>
+          <GlobeDuotone />
+          <CardTitle> Settlement Engine </CardTitle>
+          <CardDescription>
+            A unified global ledger that records all transactions between
+            participating FIs, creating the world’s first system for continuous
+            net-settlement of stablecoin-based payments.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </Grid>
+  </Section>
+
+  <!--------------------------------- LEADERSHIP -------------------------------->
+
+  <Section>
+    <SectionHeader>
+      <SectionTitle>Our Leadership Team</SectionTitle>
+
+      <SectionDescription className="mb-8">
+        t-0 is built by a team of financial infrastructure experts from some of
+        the world’s leading institutions, bringing together decades of
+        experience across banking, market systems, and payments.
+      </SectionDescription>
+
+      <Stack
+        orientation="row"
+        wrap
+        centered
+        className="text-muted-foreground w-full max-w-3xl"
+      >
+        <Lloyds />
+        <GoldmanSachs />
+        <Barclays />
+        <DBG />
+      </Stack>
+    </SectionHeader>
+
+    <Grid
+      columns={4}
+      className="mx-auto max-w-5xl max-md:grid-cols-1 max-md:justify-items-center max-md:gap-y-12"
+    >
+      {
+        team.map((teamMember) => (
+          <Stack centered>
+            <Image
+              width={220}
+              src={teamMember.data.image}
+              alt={teamMember.data.name}
+              densities={[1, 2, 3, 4]}
+              class="aspect-square rounded-3xl"
+            />
+
+            <Stack centered gap="none">
+              <Typography variant="title" size="lg">
+                {teamMember.data.name}
+              </Typography>
+              <Typography variant="body" size="lg" color="secondary">
+                {teamMember.data.title}
+              </Typography>
+            </Stack>
+          </Stack>
+        ))
+      }
+    </Grid>
+  </Section>
+
+  <!---------------------------------- INVESTORS --------------------------------->
+
+  <Section>
+    <SectionHeader>
+      <SectionTitle>Our Investors</SectionTitle>
+    </SectionHeader>
+
+    <Stack
+      centered
+      orientation="row"
+      className="text-muted-foreground mx-auto max-w-2xl gap-x-16 gap-y-8"
+    >
+      <Tether />
+      <Delphi />
+    </Stack>
+  </Section>
+</LegalLayout>
+
+<style lang="postcss">
+  @reference "@/styles/theme.css";
+  
+  strong {
+    @apply text-foreground font-medium;
+  }
+</style>

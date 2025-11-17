@@ -3,19 +3,20 @@ import { type VariantProps, cva } from "class-variance-authority";
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { omit } from "es-toolkit";
 
 const stackVariants = cva("flex", {
   variants: {
+    container: {
+      true: "container",
+      false: "",
+    },
     orientation: {
       column: "flex-col",
       row: "flex-row",
     },
     reverse: {
       true: "",
-      false: "",
-    },
-    centered: {
-      true: "justify-center! items-center!",
       false: "",
     },
     align: {
@@ -60,6 +61,7 @@ const stackVariants = cva("flex", {
     },
   ],
   defaultVariants: {
+    container: false,
     wrap: false,
     orientation: "column",
     align: "start",
@@ -68,23 +70,26 @@ const stackVariants = cva("flex", {
   },
 });
 
-interface StackProps
-  extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof stackVariants> {
-  asChild?: boolean;
-}
+type StackVariants =
+  | VariantProps<typeof stackVariants>
+  | (Omit<VariantProps<typeof stackVariants>, "justify" | "align"> & {
+      centered: true;
+    });
+
+type StackProps = React.HTMLAttributes<HTMLElement> &
+  StackVariants & {
+    asChild?: boolean;
+  };
 
 const Stack = React.forwardRef<HTMLDivElement, StackProps>(
   (
     {
       orientation,
       asChild,
-      align,
-      justify,
       className,
       gap,
       wrap,
-      centered,
+      container,
       reverse,
       children,
       ...props
@@ -92,16 +97,18 @@ const Stack = React.forwardRef<HTMLDivElement, StackProps>(
     ref,
   ) => {
     const Component = asChild ? Slot : "div";
+    const align = "centered" in props ? "center" : props.align;
+    const justify = "centered" in props ? "center" : props.justify;
 
     return (
       <Component
-        {...props}
+        {...omit(props, ["align", "justify", "centered"])}
         ref={ref}
         className={cn(
           stackVariants({
-            centered,
             wrap,
             reverse,
+            container,
             orientation,
             align,
             justify,

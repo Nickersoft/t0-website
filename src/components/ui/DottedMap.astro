@@ -1,0 +1,278 @@
+---
+import { createMap } from "svg-dotted-map";
+import { Path } from "svg-pathgen";
+import { cn } from "@/lib/utils";
+
+export interface Connection {
+  start: { lat: number; lng: number; label?: string };
+  end: { lat: number; lng: number; label?: string };
+}
+
+export interface Props {
+  width?: number;
+  height?: number;
+  mapSamples?: number;
+  connections?: Connection[];
+  dotColor?: string;
+  lineColor?: string;
+  dotRadius?: number;
+  class?: string;
+}
+
+const {
+  width = 152,
+  height = 75,
+  mapSamples = 5000,
+  connections = [],
+  dotColor = "currentColor",
+  lineColor = "#0ea5e9",
+  dotRadius = 0.2,
+  class: className,
+} = Astro.props;
+
+// Generate map data server-side
+const { points, addMarkers } = createMap({
+  width,
+  height,
+  mapSamples,
+});
+
+const markers = addMarkers(
+  connections.flatMap(({ end, start }) => [start, end]),
+);
+
+// Create curved path helper
+function createCurvedPath(
+  start: { x: number; y: number },
+  end: { x: number; y: number },
+): string {
+  const midX = (start.x + end.x) / 2;
+  const midY = (start.y + end.y) / 2 - height * 0.1;
+
+  return new Path()
+    .moveTo(start.x, start.y)
+    .curveTo(end.x, end.y, {
+      type: "cubic",
+      smooth: true,
+      control: [midX, midY],
+    })
+    .toString();
+}
+
+// Prepare canvas data for web component
+const canvasData = {
+  points,
+  width,
+  height,
+  dotColor,
+  dotRadius,
+};
+---
+
+<div
+  class={cn(
+    "relative size-full transform-gpu will-change-transform",
+    className,
+  )}
+>
+  {/* Canvas for static dots - handled by web component */}
+  <dotted-map-canvas
+    class="absolute top-0 left-0 size-full overflow-visible text-inherit"
+    data-canvas={JSON.stringify(canvasData)}
+  >
+  </dotted-map-canvas>
+
+  {/* SVG overlay for animated connections - rendered server-side */}
+  <svg
+    class="pointer-events-none absolute top-0 left-0 size-full overflow-visible"
+    viewBox={`0 0 ${width} ${height}`}
+  >
+    {
+      connections.map((_, i) => {
+        const idx = i * 2;
+        const startMarker = markers[idx];
+        const endMarker = markers[idx + 1];
+
+        if (!startMarker || !endMarker) {
+          return null;
+        }
+
+        return (
+          <g>
+            <path
+              class="motion-path"
+              d={createCurvedPath(startMarker, endMarker)}
+              fill="none"
+              stroke={lineColor}
+              stroke-width={dotRadius / 2}
+              data-delay={0.5 * i}
+            />
+          </g>
+        );
+      })
+    }
+
+    {
+      markers.map((marker, index) => (
+        <g>
+          <circle cx={marker.x} cy={marker.y} r={dotRadius} fill={lineColor} />
+          <circle
+            cx={marker.x}
+            cy={marker.y}
+            r={dotRadius}
+            fill={lineColor}
+            opacity="0.5"
+          >
+            <animate
+              attributeName="r"
+              from={dotRadius}
+              to={dotRadius * 4}
+              dur="1.5s"
+              begin="0s"
+              repeatCount="indefinite"
+            />
+            <animate
+              attributeName="opacity"
+              from="0.5"
+              to="0"
+              dur="1.5s"
+              begin="0s"
+              repeatCount="indefinite"
+            />
+          </circle>
+        </g>
+      ))
+    }
+  </svg>
+</div>
+
+<script>
+  import { animate, stagger } from "motion/react";
+
+  interface CanvasData {
+    points: Array<{ x: number; y: number }>;
+    width: number;
+    height: number;
+    dotColor: string;
+    dotRadius: number;
+  }
+
+  class DottedMapCanvas extends HTMLElement {
+    private canvas: HTMLCanvasElement | null = null;
+    private resizeObserver: ResizeObserver | null = null;
+    private canvasData: CanvasData | null = null;
+
+    connectedCallback() {
+      // Parse canvas data from data attribute
+      const dataAttr = this.getAttribute("data-canvas");
+      if (!dataAttr) return;
+
+      this.canvasData = JSON.parse(dataAttr);
+      this.initialize();
+    }
+
+    disconnectedCallback() {
+      if (this.resizeObserver) {
+        this.resizeObserver.disconnect();
+      }
+    }
+
+    private initialize() {
+      if (!this.canvasData) return;
+
+      // Create canvas element
+      this.canvas = document.createElement("canvas");
+      this.canvas.className = "size-full";
+      this.appendChild(this.canvas);
+
+      // Draw initial canvas
+      this.updateCanvas();
+
+      // Setup resize observer
+      this.resizeObserver = new ResizeObserver(() => this.updateCanvas());
+      this.resizeObserver.observe(this);
+    }
+
+    private updateCanvas() {
+      if (!this.canvas || !this.canvasData) return;
+
+      const ctx = this.canvas.getContext("2d");
+      if (!ctx) return;
+
+      const rect = this.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+
+      // Set canvas size to match container with device pixel ratio
+      this.canvas.width = rect.width * dpr;
+      this.canvas.height = rect.height * dpr;
+
+      // Clear canvas
+      ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+      // Scale context to match DPR
+      ctx.scale(dpr, dpr);
+
+      // Calculate scale to match SVG's default preserveAspectRatio behavior (contain)
+      const scale = Math.min(
+        rect.width / this.canvasData.width,
+        rect.height / this.canvasData.height,
+      );
+      const scaleX = scale;
+      const scaleY = scale;
+      const offsetX = (rect.width - this.canvasData.width * scale) / 2;
+      const offsetY = (rect.height - this.canvasData.height * scale) / 2;
+
+      // Use dotColor from canvasData (supports "currentColor")
+      let fillColor = this.canvasData.dotColor;
+
+      // If dotColor is "currentColor", get computed color from parent
+      if (fillColor === "currentColor") {
+        fillColor = getComputedStyle(this).color;
+      }
+
+      ctx.fillStyle = fillColor;
+
+      // Draw all dots with proper scaling and offset
+      this.canvasData.points.forEach((point) => {
+        ctx.beginPath();
+        ctx.arc(
+          point.x * scaleX + offsetX,
+          point.y * scaleY + offsetY,
+          this.canvasData!.dotRadius * scaleX,
+          0,
+          Math.PI * 2,
+        );
+        ctx.fill();
+      });
+    }
+  }
+
+  // Register the custom element
+  if (!customElements.get("dotted-map-canvas")) {
+    customElements.define("dotted-map-canvas", DottedMapCanvas);
+  }
+
+  // Animate the SVG paths - use a slight delay to ensure elements are ready
+  function animatePaths() {
+    const paths = document.querySelectorAll(".motion-path");
+
+    if (paths.length === 0) {
+      console.warn("No .motion-path elements found");
+      return;
+    }
+
+    animate(
+      paths,
+      { pathLength: [0, 1] },
+      { duration: 1, delay: stagger(0.2), ease: "easeOut" },
+    );
+  }
+
+  // Run animations when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", animatePaths);
+  } else {
+    // DOM already loaded, run immediately with a small delay
+    setTimeout(animatePaths, 100);
+  }
+</script>

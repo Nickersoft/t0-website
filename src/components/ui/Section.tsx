@@ -7,7 +7,7 @@ const sectionHeaderVariants = cva(
   {
     variants: {
       align: {
-        center: "text-center items-center",
+        center: "text-center mx-auto items-center",
         left: "text-left items-start",
       },
     },
@@ -35,29 +35,27 @@ export function SectionHeader({
   );
 }
 
-const sectionVariants = cva("py-24", {
+const sectionVariants = cva("px-8 py-24", {
   variants: {
+    container: {
+      true: "container",
+      false: "",
+    },
     variant: {
       default: "",
       accented:
         "bg-accent py-32 [clip-path:polygon(0_5%,100%_0,100%_95%,0%_100%)]",
     },
-    layout: {
-      vertical:
-        "*:data-[slot=content]:flex *:data-[slot=content]:items-center *:data-[slot=content]:flex-col",
-      horizontal:
-        "*:data-[slot=content]:items-center *:data-[slot=content]:grid *:data-[slot=content]:gap-6 *:data-[slot=content]:grid-cols-2 *:data-[slot=content]:max-md:grid-cols-1",
-    },
   },
   defaultVariants: {
     variant: "default",
-    layout: "vertical",
+    container: false,
   },
 });
 
 export function Section({
   variant,
-  layout,
+  container,
   children,
   className,
   ...props
@@ -65,11 +63,9 @@ export function Section({
   return (
     <section
       {...props}
-      className={cn(sectionVariants({ variant, layout }), className)}
+      className={cn(sectionVariants({ container, variant }), className)}
     >
-      <div className="container" data-slot="content">
-        {children}
-      </div>
+      {children}
     </section>
   );
 }
@@ -91,7 +87,7 @@ export function SectionTitle({
   );
 }
 
-export function SectionSubtitle({
+export function SectionDescription({
   className,
   children,
   ...props
