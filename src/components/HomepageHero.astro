@@ -1,6 +1,12 @@
 ---
+import { Image } from "astro:assets";
+
 import { DottedMap, type Connection } from "./ui/DottedMap";
 import { Grid } from "./ui/Grid";
+
+import noise from "@/assets/png/noise.png?inline";
+import { cssVars } from "@/lib/utils";
+import { url } from "@/lib/units";
 
 const leftConnections: Connection[] = [
   {
@@ -46,9 +52,15 @@ const rightConnections: Connection[] = [
 ---
 
 <div
-  class="@container-[size] relative h-150 overflow-hidden bg-linear-to-b from-green-800 to-green-700 [clip-path:polygon(0_0%,100%_0,100%_97%,0%_100%)]"
+  class="@container-[size] relative h-175 overflow-hidden bg-linear-to-b from-green-800 to-green-700 [clip-path:polygon(0_0%,100%_0,100%_97%,0%_100%)]"
 >
-  <Grid columns="1fr auto 1fr" className="max-md:grid-cols-1">
+  <div
+    class="absolute inset-0 bg-(image:--bg) bg-size-[72px] bg-repeat"
+    style={cssVars({ bg: url(noise) })}
+  >
+  </div>
+
+  <Grid columns="1fr auto 1fr" className="h-full max-md:grid-cols-1">
     <!-- Left Map -->
     <div
       class="relative size-full max-md:absolute max-md:top-0 max-md:left-1/2 max-md:z-1 max-md:-translate-x-1/2 max-md:opacity-10"

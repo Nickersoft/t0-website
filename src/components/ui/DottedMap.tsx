@@ -1,7 +1,8 @@
 import * as React from "react";
 import { createMap } from "svg-dotted-map";
-import { motion } from "motion/react";
+import { animate, motion } from "motion/react";
 import { Path } from "svg-pathgen";
+import { cn } from "@/lib/utils";
 
 export interface Connection {
   start: { lat: number; lng: number; label?: string };
@@ -51,9 +52,11 @@ export function DottedMap({
   React.useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
+
     if (!canvas || !container) return;
 
     const ctx = canvas.getContext("2d");
+
     if (!ctx) return;
 
     const updateCanvas = () => {
@@ -94,6 +97,7 @@ export function DottedMap({
 
       // Get computed color from CSS
       const computedColor = getComputedStyle(canvas).color;
+
       ctx.fillStyle = computedColor || dotColor;
 
       // Draw all dots with proper scaling and offset
@@ -114,7 +118,10 @@ export function DottedMap({
 
     // Redraw on resize
     const resizeObserver = new ResizeObserver(updateCanvas);
+
     resizeObserver.observe(container);
+
+    animate(container, { opacity: 1 }, { duration: 0.4 });
 
     return () => resizeObserver.disconnect();
   }, [width, height, mapData.points, dotColor, dotRadius]);
@@ -122,7 +129,7 @@ export function DottedMap({
   const createCurvedPath = React.useCallback(
     (start: { x: number; y: number }, end: { x: number; y: number }) => {
       const midX = (start.x + end.x) / 2;
-      const midY = (start.y + end.y) / 2 - height * 0.2;
+      const midY = (start.y + end.y) / 2 - height * 0.1;
 
       return new Path()
         .moveTo(start.x, start.y)
@@ -139,41 +146,21 @@ export function DottedMap({
   return (
     <div
       ref={containerRef}
-      className={className}
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        transform: "translateZ(0)",
-        willChange: "transform",
-      }}
+      className={cn(
+        "relative size-full transform-gpu opacity-0 will-change-transform",
+        className,
+      )}
     >
       {/* Canvas for static dots */}
       <canvas
         ref={canvasRef}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          color: "inherit",
-          overflow: "visible",
-        }}
+        className="absolute top-0 left-0 size-full overflow-visible text-inherit"
       />
 
       {/* SVG overlay for animated connections only */}
       <svg
+        className="pointer-events-none absolute top-0 left-0 size-full overflow-visible"
         viewBox={`0 0 ${width} ${height}`}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-          overflow: "visible",
-        }}
       >
         {connections.map((_, i) => {
           const idx = i * 2;

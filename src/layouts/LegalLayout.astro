@@ -1,0 +1,43 @@
+---
+import type { Props as BaseLayoutProps } from "@/layouts/BaseLayout.astro";
+
+import { Image } from "astro:assets";
+
+import { Navigation } from "@/components/Navigation";
+
+import header from "@/assets/png/header-logo.png";
+
+import Footer from "@/components/Footer.astro";
+
+import BaseLayout from "./BaseLayout.astro";
+import { Typography } from "@/components/ui/Typography";
+
+export interface Props extends BaseLayoutProps {}
+---
+
+<BaseLayout {...Astro.props}>
+  <main>
+    <Navigation client:load />
+    <header
+      class="to-primary relative overflow-hidden bg-linear-to-b from-green-800 py-24"
+    >
+      <div class="dark container grid grid-cols-2">
+        <Typography variant="display" size="lg" className="text-[4rem]">
+          {Astro.props.title}
+        </Typography>
+
+        <div class="relative">
+          <Image
+            alt="t-0 Logo"
+            class="absolute top-0 left-0 max-w-none -translate-y-1/4"
+            width={1024}
+            layout="fixed"
+            src={header}
+          />
+        </div>
+      </div>
+    </header>
+    <slot />
+    <Footer />
+  </main>
+</BaseLayout>

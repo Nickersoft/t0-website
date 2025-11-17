@@ -1,7 +1,7 @@
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import * as React from "react";
 
-import { ChevronDown } from "@/icons";
+import { CaretDown } from "@/icons";
 import { cn } from "@/lib/utils";
 
 const Accordion = AccordionPrimitive.Root;
@@ -33,7 +33,7 @@ const AccordionTrigger = React.forwardRef<
       {...props}
     >
       <div className="text-primary-foreground from-primary flex size-6 items-center justify-center rounded-full bg-linear-to-b to-green-800">
-        <ChevronDown className="size-4 shrink-0 transition-transform duration-200" />
+        <CaretDown className="size-4 shrink-0 transition-transform duration-200" />
       </div>
       {children}
     </AccordionPrimitive.Trigger>
