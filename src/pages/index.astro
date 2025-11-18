@@ -2,6 +2,9 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
+// Rive
+import bottomCTA from "@/assets/riv/cta-bg.riv?url";
+
 // Icons
 import { LockOpen, CaretRight } from "@/icons";
 
@@ -64,6 +67,8 @@ import { getCurrency } from "@/lib/currency";
 import { ProgressiveBlur } from "@/components/ui/ProgressiveBlur";
 
 import HomepageHero from "@/components/HomepageHero.astro";
+import { Rive } from "@/components/ui/Rive";
+import Noise from "@/components/Noise.astro";
 
 const faq = await getCollection("faq");
 
@@ -126,7 +131,7 @@ const CURRENCIES = [
         variant="body"
         className="text-primary-foreground flex flex-row items-center justify-center gap-2 opacity-75"
       >
-        Backed by <Tether />
+        Backed by <Tether class="w-24" />
       </Typography>
     </SectionHeader>
   </HomepageHero>
@@ -236,6 +241,7 @@ const CURRENCIES = [
       </SectionHeader>
 
       <Grid
+        responsive
         columns={2}
         className="mx-auto w-full max-w-5xl"
         justifyItems="stretch"
@@ -318,7 +324,7 @@ const CURRENCIES = [
   <!---------------------------------- USE CASES --------------------------------->
 
   <Section variant="accented">
-    <Grid columns={2} container>
+    <Grid columns={2} container responsive>
       <SectionHeader className="flex-1" align="left">
         <SectionTitle>
           Powered by Tether. Built for institutions.
@@ -341,13 +347,13 @@ const CURRENCIES = [
       </SectionHeader>
 
       <ItemGroup className="[&_a]:h-auto [&_a]:p-0">
-        <Item size="lg">
+        <Item size="lg" className="max-md:flex-col">
           <ItemMedia>
             <Bank />
           </ItemMedia>
           <ItemContent>
             <ItemTitle> For banks </ItemTitle>
-            <ItemDescription>
+            <ItemDescription className="line-clamp-none">
               Optimise liquidity and reduce FX exposure through instant, low
               cost, stablecoin net settlement.
             </ItemDescription>
@@ -362,13 +368,13 @@ const CURRENCIES = [
 
         <ItemSeparator />
 
-        <Item size="lg">
+        <Item size="lg" className="max-md:flex-col">
           <ItemMedia>
             <Pipeline />
           </ItemMedia>
           <ItemContent>
             <ItemTitle> For fintechs </ItemTitle>
-            <ItemDescription>
+            <ItemDescription className="max-md:line-clamp-none">
               Grow revenue, expand currency coverage and unlock new payment
               corridors powered by USDT liquidity.
             </ItemDescription>
@@ -383,13 +389,13 @@ const CURRENCIES = [
 
         <ItemSeparator />
 
-        <Item size="lg">
+        <Item size="lg" className="max-md:flex-col">
           <ItemMedia>
             <CC />
           </ItemMedia>
           <ItemContent>
             <ItemTitle> For payment platforms </ItemTitle>
-            <ItemDescription>
+            <ItemDescription className="max-md:line-clamp-none">
               Collect and pay out globally through a single API, simplifying
               treasury and reconciliation.
             </ItemDescription>
@@ -464,7 +470,10 @@ const CURRENCIES = [
         Unlock all currencies
       </Link>
 
-      <Grid columns={3} className="relative w-full mask-b-to-transparent pb-16">
+      <Grid
+        columns={3}
+        className="relative w-full mask-b-to-transparent pb-16 max-md:grid-cols-2 max-sm:grid-cols-1"
+      >
         {
           CURRENCIES.map(({ flag: Flag, ...currency }) => (
             <Stack orientation="row" align="center" className="p-4 w-full">
@@ -485,7 +494,7 @@ const CURRENCIES = [
   </Section>
 
   <Section>
-    <Grid columns={2} container>
+    <Grid columns={2} responsive container>
       <SectionHeader align="left">
         <SectionTitle className="max-w-sm">
           Frequently Asked Questions
@@ -494,5 +503,33 @@ const CURRENCIES = [
 
       <FAQ questions={faq} client:visible />
     </Grid>
+  </Section>
+
+  <Section
+    className="bg-primary relative inset-shadow-[0_12px_24px] inset-shadow-black/30"
+  >
+    <SectionHeader align="center" className="dark relative z-20">
+      <SectionTitle
+        variant="display"
+        size="lg"
+        className="max-w-4xl text-6xl text-shadow-[0_12px_24px] text-shadow-black/30"
+      >
+        Join the world's most liquid settlement network
+      </SectionTitle>
+
+      <Link variant="default" className="dark mt-4 bg-sky-300 text-sky-900!">
+        Access the network
+        <CaretRight />
+      </Link>
+    </SectionHeader>
+
+    <Noise class="absolute inset-0 z-10 bg-black/30" />
+
+    <Rive
+      src={bottomCTA}
+      fit="cover"
+      className="pointer-events-none absolute inset-0 w-full"
+      client:only="react"
+    />
   </Section>
 </PageLayout>

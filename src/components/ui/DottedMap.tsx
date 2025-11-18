@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createMap } from "svg-dotted-map";
-import { animate, motion } from "motion/react";
+import { motion } from "motion/react";
 import { Path } from "svg-pathgen";
 import { cn } from "@/lib/utils";
 

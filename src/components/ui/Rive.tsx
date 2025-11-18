@@ -33,7 +33,7 @@ const alignmentMap = {
 };
 
 export type RiveProps = ComponentProps<"canvas"> & {
-  animation: string;
+  src: string;
   artboard?: string;
   params?: Partial<
     Omit<NonNullable<UseRiveParameters>, "artboard" | "layout" | "src">
@@ -47,17 +47,19 @@ export function Rive({
   alignment,
   params,
   artboard,
-  animation,
+  src,
   ...props
 }: RiveProps) {
   const { onLoad = () => {}, ...restParams } = params ?? {};
 
   const { RiveComponent, container } = useRive(
     {
-      src: animation,
+      ...restParams,
+      src,
       artboard,
       stateMachines: params?.stateMachines ?? "State Machine 1",
       autoplay: true,
+      autoBind: true,
       layout: new Layout({
         ...(fit && { fit: fitMap[fit] }),
         ...(alignment && { alignment: alignmentMap[alignment] }),
@@ -66,7 +68,6 @@ export function Rive({
         animate(container as HTMLElement, { opacity: [0, 1] });
         onLoad(e);
       },
-      ...restParams,
     },
     { shouldUseIntersectionObserver: true },
   );

@@ -1,5 +1,5 @@
 export function url(value: string) {
-  return `url(${value})`;
+  return `url('${value}')`;
 }
 
 export function rem(value: number) {

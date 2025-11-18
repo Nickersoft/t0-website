@@ -31,19 +31,14 @@ export function useIsScrolling(target?: React.RefObject<HTMLElement>): boolean {
   React.useEffect(() => {
     const el = target?.current ?? window;
 
-    let scrollingTimeout: NodeJS.Timer;
-
-    function handleScrollEnd() {
-      setScrolling(false);
-    }
-
     function handleScroll() {
-      setScrolling(true);
-      clearTimeout(scrollingTimeout);
-      scrollingTimeout = setTimeout(() => handleScrollEnd(), 150);
+      setScrolling(
+        (target?.current.scrollTop ??
+          window.document.documentElement.scrollTop) > 0,
+      );
     }
 
-    setScrolling((target?.current.scrollTop ?? document.body.scrollTop) > 0);
+    handleScroll();
 
     el.addEventListener("scroll", handleScroll, false);
 

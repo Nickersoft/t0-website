@@ -11,6 +11,10 @@ const gridVariants = cva("grid", {
       true: "container",
       false: "",
     },
+    responsive: {
+      true: "max-md:grid-cols-1",
+      false: "",
+    },
     columns: {
       true: "grid-cols-(--columns)",
       false: "",
@@ -114,6 +118,7 @@ function Grid({
   rows,
   justifyItems,
   className,
+  responsive,
   gap,
   minHeight,
   minWidth,
@@ -133,6 +138,7 @@ function Grid({
       className={cn(
         gridVariants({
           container,
+          responsive,
           alignCells,
           columns: columns !== undefined,
           rows: rows !== undefined,

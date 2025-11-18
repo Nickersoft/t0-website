@@ -25,7 +25,7 @@ export function Navigation() {
       <nav
         className={cn(
           "fixed z-50 w-full bg-white",
-          isScrolling && "border-border/30 border-b shadow-md",
+          isScrolling && "border-border/30 border-b shadow-xl shadow-black/3",
         )}
       >
         <Stack
@@ -36,7 +36,7 @@ export function Navigation() {
           className="container py-8"
         >
           <a href="/">
-            <Logo className="h-24 w-32" />
+            <Logo className="h-32 w-36" />
           </a>
 
           <Stack orientation="row" align="center" gap="md">

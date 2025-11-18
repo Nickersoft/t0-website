@@ -11,6 +11,10 @@ const stackVariants = cva("flex", {
       true: "container",
       false: "",
     },
+    responsive: {
+      true: "max-md:flex-col",
+      false: "",
+    },
     orientation: {
       column: "flex-col",
       row: "flex-row",
