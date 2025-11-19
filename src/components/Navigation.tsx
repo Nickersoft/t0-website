@@ -17,7 +17,7 @@ const links = [
 ];
 
 export function Navigation() {
-  const height = 80;
+  const height = 72;
   const isScrolling = useIsScrolling();
 
   return (

@@ -11,6 +11,7 @@ import Footer from "@/components/Footer.astro";
 
 import BaseLayout from "./BaseLayout.astro";
 import { Typography } from "@/components/ui/Typography";
+import Noise from "@/components/Noise.astro";
 
 export interface Props extends BaseLayoutProps {}
 ---
@@ -24,9 +25,15 @@ export interface Props extends BaseLayoutProps {}
       <div
         class="dark container grid grid-cols-2 max-md:grid-cols-1 max-md:justify-items-center max-md:text-center"
       >
-        <Typography variant="display" size="lg" className="text-[4rem]">
+        <Typography
+          variant="display"
+          size="lg"
+          className="relative z-20 text-[4rem]"
+        >
           {Astro.props.title}
         </Typography>
+
+        <Noise class="absolute inset-0 z-10" />
 
         <div class="relative">
           <Image

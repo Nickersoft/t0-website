@@ -107,7 +107,7 @@ const CURRENCIES = [
   <HomepageHero>
     <SectionHeader className="relative z-10 h-full justify-center-safe py-40">
       <SectionTitle
-        className="dark"
+        className="dark blur-in motion-safe:animate-in fade-in zoom-in-105 fill-mode-both duration-1500 ease-out"
         variant="display"
         size="lg"
         color="primary"
@@ -115,7 +115,7 @@ const CURRENCIES = [
         Money without borders
       </SectionTitle>
       <SectionDescription
-        className="dark max-w-2xl text-balance"
+        className="dark slide-in-from-top-2 motion-safe:animate-in fill-mode-both fade-in max-w-2xl text-balance delay-400 duration-2000 ease-out"
         variant="body"
         size="lg"
         color="primary"
@@ -123,13 +123,16 @@ const CURRENCIES = [
         Move money instantly, at low cost, with the world's most liquid
         stablecoin settlement network. Built for institutions. Powered by USDT.
       </SectionDescription>
-      <Link variant="default" className="dark my-8 bg-sky-300 text-sky-900!">
+      <Link
+        variant="default"
+        className="dark motion-safe:animate-in slide-in-from-bottom-25 fade-in fill-mode-both animation-duration-[1500ms] my-8 block bg-sky-300 text-sky-900! ease-out motion-safe:[animation-delay:500ms]"
+      >
         Access the network
         <CaretRight />
       </Link>
       <Typography
         variant="body"
-        className="text-primary-foreground flex flex-row items-center justify-center gap-2 opacity-75"
+        className="text-primary-foreground motion-safe:animate-in slide-in-from-bottom-25 fill-mode-both fade-in flex flex-row items-center justify-center gap-2 opacity-75 delay-900 duration-1500"
       >
         Backed by <Tether class="w-24" />
       </Typography>
