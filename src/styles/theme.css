@@ -10,19 +10,19 @@
 /* -------------------------------------------------------------------------- */
 
 :root {
-  --background: var(--color-zinc-50);
-  --foreground: var(--color-zinc-950);
+  --background: var(--color-gray-50);
+  --foreground: var(--color-gray-950);
   --card: var(--color-white);
   --card-foreground: var(--color-foreground);
   --popover: var(--color-white);
   --popover-foreground: var(--color-foreground);
-  --primary: var(--color-blue-600);
-  --primary-foreground: var(--color-blue-50);
-  --secondary: var(--color-zinc-200);
-  --secondary-foreground: var(--color-zinc-600);
-  --muted: var(--color-zinc-300);
-  --muted-foreground: var(--color-zinc-300);
-  --accent: var(--color-zinc-100);
+  --primary: var(--color-green-700);
+  --primary-foreground: var(--color-white);
+  --secondary: var(--color-gray-200);
+  --secondary-foreground: var(--color-gray-600);
+  --muted: var(--color-gray-300);
+  --muted-foreground: var(--color-gray-600);
+  --accent: var(--color-gray-100);
   --accent-foreground: var(--foreground);
   --destructive: var(--color-red-500);
   --destructive-foreground: var(--color-red-50);
@@ -42,19 +42,19 @@
 }
 
 .dark {
-  --background: var(--color-zinc-950);
-  --foreground: var(--color-zinc-50);
-  --card: var(--color-zinc-800);
-  --card-foreground: var(--color-zinc-50);
-  --popover: var(--color-zinc-800);
-  --popover-foreground: var(--color-zinc-50);
-  --primary: var(--color-blue-500);
-  --primary-foreground: var(--color-blue-50);
-  --secondary: var(--color-zinc-700);
-  --secondary-foreground: var(--color-zinc-300);
-  --muted: var(--color-zinc-600);
-  --muted-foreground: var(--color-zinc-600);
-  --accent: var(--color-zinc-100);
+  --background: var(--color-gray-950);
+  --foreground: var(--color-gray-50);
+  --card: var(--color-gray-800);
+  --card-foreground: var(--color-gray-50);
+  --popover: var(--color-gray-800);
+  --popover-foreground: var(--color-gray-50);
+  --primary: var(--color-green-50);
+  --primary-foreground: var(--color-green-500);
+  --secondary: var(--color-gray-700);
+  --secondary-foreground: var(--color-gray-300);
+  --muted: var(--color-gray-600);
+  --muted-foreground: var(--color-gray-600);
+  --accent: var(--color-gray-100);
   --accent-foreground: var(--foreground);
   --destructive: var(--color-red-500);
   --destructive-foreground: var(--color-red-50);
@@ -62,7 +62,7 @@
   --success-foreground: var(--color-emerald-50);
   --warning: var(--color-orange-500);
   --warning-foreground: var(--color-orange-50);
-  --border: color-mix(in oklab, var(--color-white) 10%, transparent);
+  --border: --alpha(var(--color-white) / 10%);
   --input: var(--border);
   --ring: var(--primary);
   --chart-1: hsl(220 70% 50%);
@@ -104,6 +104,12 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
+  /* ------------------------------- Box Shadow ------------------------------- */
+
+  --shadow-md:
+    0px 62px 37px rgba(0, 15, 31, 0.01), 0px 28px 28px rgba(0, 15, 31, 0.01),
+    0px 7px 15px rgba(0, 15, 31, 0.01);
+
   /* ------------------------------ Border Radius ----------------------------- */
 
   --radius-lg: var(--radius);
@@ -119,9 +125,8 @@
 @theme {
   /* ---------------------------------- Fonts --------------------------------- */
 
-  --font-*: initial;
-  --font-sans: Inter Variable, Arial, Helvetica, sans-serif;
-  --font-display: Inter Variable, Arial, Helvetica, sans-serif;
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-figtree);
 
   /* ------------------------------- Animations ------------------------------- */
 

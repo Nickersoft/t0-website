@@ -22,6 +22,12 @@ export default defineConfig({
         cssVariable: "--font-inter",
         weights: ["400 700"],
       },
+      {
+        provider: fontProviders.google(),
+        name: "Figtree",
+        cssVariable: "--font-figtree",
+        weights: ["400 700"],
+      },
     ],
   },
   vite: {

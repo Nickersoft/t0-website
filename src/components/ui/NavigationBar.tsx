@@ -1,4 +1,4 @@
-import { Menu } from "@/icons";
+import { List } from "@/icons";
 
 import {
   Sheet,
@@ -15,11 +15,11 @@ interface NavigationMenuProps {
 export function NavigationBar({ side, children }: NavigationMenuProps) {
   return (
     <>
-      <div className="md:contents hidden">{children}</div>
-      <div className="md:hidden contents">
+      <div className="hidden md:contents">{children}</div>
+      <div className="contents md:hidden">
         <Sheet>
-          <SheetTrigger className="flex cursor-pointer justify-center items-center">
-            <Menu className="size-6" />
+          <SheetTrigger className="flex cursor-pointer items-center justify-center">
+            <List className="size-6" />
           </SheetTrigger>
           <SheetContent className="size-full" side={side}>
             {children}

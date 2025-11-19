@@ -11,7 +11,11 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border antialiased;
+  }
+
+  strong {
+    @apply font-medium;
   }
 
   body {

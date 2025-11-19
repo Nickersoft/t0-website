@@ -1,0 +1,66 @@
+---
+import { buttonVariants } from "./ui/Button";
+import { Stack } from "./ui/Stack";
+
+import Logo from "~icons/assets/t0";
+import { cn } from "@/lib/utils";
+import { Link } from "./ui/Link";
+import { Separator } from "./ui/Separator";
+import { Typography } from "./ui/Typography";
+
+const links = [
+  {
+    href: "/about",
+    label: "About Us",
+  },
+  {
+    href: "/contact",
+    label: "Contact",
+  },
+];
+---
+
+<footer class="container py-8">
+  <Stack
+    orientation="row"
+    justify="between"
+    align="center"
+    className="mb-48 whitespace-nowrap max-md:w-full max-md:flex-col max-md:items-start"
+  >
+    <Stack orientation="row" align="center" className="h-8 max-md:mb-12">
+      <Logo className="h-8 w-32" />
+      <Separator orientation="vertical" />
+      <Typography variant="body" size="md" color="muted">
+        Money without borders
+      </Typography>
+    </Stack>
+
+    <ul
+      class="flex flex-row gap-2 text-sm font-medium max-md:-ml-4 max-md:flex-col"
+    >
+      {
+        links.map((link) => (
+          <li>
+            <a
+              class={cn(
+                buttonVariants({ variant: "link" }),
+                "text-muted-foreground hover:text-secondary-foreground",
+              )}
+              href={link.href}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+
+      <li>
+        <Link variant="ghost">Access network</Link>
+      </li>
+    </ul>
+  </Stack>
+
+  <Typography variant="body" size="sm" color="muted" className="opacity-75">
+    &copy; {new Date().getFullYear()} t-0 Network
+  </Typography>
+</footer>

@@ -7,11 +7,11 @@ import { type VariantProps, cva } from "class-variance-authority";
 export const typographyVariants = cva("", {
   variants: {
     variant: {
-      display: "font-display font-medium",
-      headline: "font-display",
-      title: "font-sans font-bold",
+      display: "font-display tracking-tight font-normal",
+      headline: "font-display font-medium",
+      title: "font-sans font-medium",
       body: "font-sans font-normal",
-      label: "font-sans font-bold",
+      label: "font-sans uppercase tracking-widest font-semibold",
     },
     size: {
       sm: "",
@@ -25,13 +25,12 @@ export const typographyVariants = cva("", {
     },
     color: {
       success: "text-success",
-      danger: "text-danger",
-      warn: "text-warn",
+      destructive: "text-destructive",
+      warning: "text-warning",
       primary: "text-primary",
-      default: "text-default",
-      subtle: "text-subtle",
-      muted: "text-muted",
-      invert: "text-invert",
+      default: "text-foreground",
+      secondary: "text-secondary-foreground",
+      muted: "text-muted-foreground",
       inherit: "text-inherit",
     },
   },
@@ -39,7 +38,7 @@ export const typographyVariants = cva("", {
     {
       variant: "display",
       size: "lg",
-      class: "tablet:text-[3rem] text-[4.5rem] leading-none",
+      class: "tablet:text-[3rem] text-[5rem] leading-none",
     },
     {
       variant: "display",

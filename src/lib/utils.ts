@@ -7,9 +7,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function cssVars(vars: Record<string, string | number>) {
+export function cssVars(
+  vars: Record<string, string | number | null | undefined>,
+) {
   return Object.entries(vars).reduce(
     (acc, [key, value]) => {
+      if (!value) return acc;
       acc[variable(key)] = value.toString();
       return acc;
     },

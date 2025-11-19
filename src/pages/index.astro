@@ -1,15 +1,538 @@
 ---
-import { Typography } from "@/components/ui/Typography";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+// Rive
+import bottomCTA from "@/assets/riv/cta-bg.riv?url";
+
+// Icons
+import { LockOpen, CaretRight } from "@/icons";
+
+// SVG Assets
+import Tether from "@/assets/svg/tether.svg";
+import Bank from "@/assets/svg/iso/bank.svg";
+import CC from "@/assets/svg/iso/cc.svg";
+import Pipeline from "@/assets/svg/iso/pipeline.svg";
+
+// PNG Assets
+import markets from "@/assets/png/markets.png";
+import transfers from "@/assets/png/global-transfers.png";
+import revenue from "@/assets/png/new-revenue.png";
+import quote from "@/assets/png/quote.png";
+import fx from "@/assets/png/fx-cost.png";
 
 import PageLayout from "@/layouts/PageLayout.astro";
+
+// UI Components
+import { Blockquote, BlockquoteAuthor } from "@/components/ui/Blockquote";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/Card";
+import { Grid } from "@/components/ui/Grid";
+import { Statistic } from "@/components/ui/Statistic";
+import { Stack } from "@/components/ui/Stack";
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemDescription,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/Item";
+import { Link } from "@/components/ui/Link";
+import { ItemSeparator } from "@/components/ui/Item";
+import { ItemGroup } from "@/components/ui/Item";
+import {
+  Section,
+  SectionHeader,
+  SectionDescription,
+  SectionTitle,
+} from "@/components/ui/Section";
+import {
+  Timeline,
+  TimelineItem,
+  TimelineItemLabel,
+  TimelineItemTitle,
+} from "@/components/ui/Timeline";
+
+// Site Components
+import { FAQ } from "@/components/FAQ";
+
+import TimelineCard from "@/components/TimelineCard.astro";
+import { Typography } from "@/components/ui/Typography";
+import { getCurrency } from "@/lib/currency";
+import { ProgressiveBlur } from "@/components/ui/ProgressiveBlur";
+
+import HomepageHero from "@/components/HomepageHero.astro";
+import { Rive } from "@/components/ui/Rive";
+import Noise from "@/components/Noise.astro";
+
+const faq = await getCollection("faq");
+
+const CURRENCIES = [
+  "USD",
+  "EUR",
+  "CNY",
+  "JPY",
+  "HKD",
+  "SGD",
+  "AED",
+  "INR",
+  "HKD",
+  "SGD",
+  "MXN",
+  "BRL",
+  "ARS",
+  "COP",
+  "PEN",
+  "KES",
+  "ZAR",
+  "NGN",
+  "XOF",
+  "XAF",
+  "PHP",
+  "VND",
+  "IDR",
+]
+  .map(getCurrency)
+  .filter(Boolean);
 ---
 
 <PageLayout title="Home">
-  <Typography
-    variant="display"
-    size="lg"
-    className="animate-in fade-in duration-10000"
+  <!------------------------------------ HERO ------------------------------------>
+
+  <HomepageHero>
+    <SectionHeader className="relative z-10 h-full justify-center-safe py-40">
+      <SectionTitle
+        className="dark blur-in motion-safe:animate-in fade-in zoom-in-105 fill-mode-both duration-1500 ease-out"
+        variant="display"
+        size="lg"
+        color="primary"
+      >
+        Money without borders
+      </SectionTitle>
+      <SectionDescription
+        className="dark slide-in-from-top-2 motion-safe:animate-in fill-mode-both fade-in max-w-2xl text-balance delay-400 duration-2000 ease-out"
+        variant="body"
+        size="lg"
+        color="primary"
+      >
+        Move money instantly, at low cost, with the world's most liquid
+        stablecoin settlement network. Built for institutions. Powered by USDT.
+      </SectionDescription>
+      <Link
+        variant="default"
+        className="dark motion-safe:animate-in slide-in-from-bottom-25 fade-in fill-mode-both animation-duration-[1500ms] my-8 block bg-sky-300 text-sky-900! ease-out motion-safe:[animation-delay:500ms]"
+      >
+        Access the network
+        <CaretRight />
+      </Link>
+      <Typography
+        variant="body"
+        className="text-primary-foreground motion-safe:animate-in slide-in-from-bottom-25 fill-mode-both fade-in flex flex-row items-center justify-center gap-2 opacity-75 delay-900 duration-1500"
+      >
+        Backed by <Tether class="w-24" />
+      </Typography>
+    </SectionHeader>
+  </HomepageHero>
+
+  <!---------------------------------- FEATURES ---------------------------------->
+
+  <Section container>
+    <SectionHeader>
+      <SectionTitle> The network for global money movement</SectionTitle>
+      <SectionDescription>
+        t-0 connects licensed financial institutions through a single
+        integration, using stablecoin liquidity and net settlement to make
+        cross-border transfers faster, cheaper, and more efficient than legacy
+        rails.
+      </SectionDescription>
+    </SectionHeader>
+
+    <Grid
+      columns={4}
+      gap="lg"
+      justifyItems="stretch"
+      className="w-full max-lg:grid-cols-2 max-sm:grid-cols-1"
+    >
+      <Card size="sm">
+        <Image
+          class="mb-4"
+          alt="Moving money"
+          src={transfers}
+          width={500}
+          layout="full-width"
+        />
+
+        <CardHeader>
+          <CardTitle>Fast global transfers</CardTitle>
+          <CardDescription>
+            Transfer value with near-instant settlement across 1200+ possible
+            payment corridors and FX pairs.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+      <Card size="sm">
+        <Image
+          class="mb-4"
+          alt="FX symbol slashed by beam"
+          src={fx}
+          width={500}
+          layout="full-width"
+        />
+
+        <CardHeader>
+          <CardTitle>Slash FX costs</CardTitle>
+          <CardDescription>
+            Execute global transfers for bps, not percentages. You are never
+            exposed to the target currency FX rate.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+      <Card size="sm">
+        <Image
+          class="mb-4"
+          alt="T-0 routing traffic"
+          src={revenue}
+          layout="full-width"
+        />
+
+        <CardHeader>
+          <CardTitle>Generate new business</CardTitle>
+          <CardDescription>
+            Execute payment volumes in your specialist currencies on behalf of
+            other t-0 Network members
+          </CardDescription>
+        </CardHeader>
+      </Card>
+      <Card size="sm">
+        <Image
+          class="mb-4"
+          alt="Foreign currency symbols"
+          src={markets}
+          width={500}
+          layout="full-width"
+        />
+
+        <CardHeader>
+          <CardTitle>Access emerging markets</CardTitle>
+          <CardDescription>
+            t-0 connects you to local payment rails via licensed FI's in 50+
+            countries via a single API.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </Grid>
+  </Section>
+
+  <!--------------------------------- COMPARISON --------------------------------->
+
+  <Section container>
+    <Stack orientation="column" align="center">
+      <SectionHeader>
+        <SectionTitle>
+          A <em>swifter</em> way to move money
+        </SectionTitle>
+        <SectionDescription>
+          Traditional cross-border payments are slowed by legacy infrastructure,
+          creating unnecessary cost and complexity. t-0 network provides a
+          direct, programmable, and more efficient path for money movement.
+        </SectionDescription>
+      </SectionHeader>
+
+      <Grid
+        responsive
+        columns={2}
+        className="mx-auto w-full max-w-5xl"
+        justifyItems="stretch"
+      >
+        <TimelineCard
+          variant="outline"
+          title=" Legacy Rails"
+          totalTime="2+ days"
+        >
+          <Timeline client:load>
+            <TimelineItem>
+              <TimelineItemLabel>Same or Next Day</TimelineItemLabel>
+              <TimelineItemTitle>Initiate international wire</TimelineItemTitle>
+            </TimelineItem>
+            <TimelineItem>
+              <TimelineItemLabel>1 - 3 business days</TimelineItemLabel>
+              <TimelineItemTitle>
+                Funds move through intermediaries
+              </TimelineItemTitle>
+            </TimelineItem>
+            <TimelineItem>
+              <TimelineItemLabel> 1 - 2 business days </TimelineItemLabel>
+              <TimelineItemTitle>
+                Receiving bank processes payment
+              </TimelineItemTitle>
+            </TimelineItem>
+            <TimelineItem>
+              <TimelineItemLabel>Last day</TimelineItemLabel>
+              <TimelineItemTitle>
+                Final settlement and reconciliation
+              </TimelineItemTitle>
+            </TimelineItem>
+          </Timeline>
+        </TimelineCard>
+        <TimelineCard variant="primary" title="t-0 Network" totalTime="< 1 hr">
+          <Timeline client:load variant="primary" className="dark">
+            <TimelineItem>
+              <TimelineItemLabel>~0.2 milliseconds</TimelineItemLabel>
+              <TimelineItemTitle>
+                Match quotes with other correspondents from t-0's FX Order Book
+              </TimelineItemTitle>
+            </TimelineItem>
+            <TimelineItem>
+              <TimelineItemLabel>1 - 5 minutes</TimelineItemLabel>
+              <TimelineItemTitle>
+                Sender transfers source currency via local rails
+              </TimelineItemTitle>
+            </TimelineItem>
+            <TimelineItem>
+              <TimelineItemLabel> 1 - 10 minutes </TimelineItemLabel>
+              <TimelineItemTitle>
+                Correspondent transfers target currency to recipient via local
+                rails
+              </TimelineItemTitle>
+            </TimelineItem>
+            <TimelineItem>
+              <TimelineItemLabel>On Demand</TimelineItemLabel>
+              <TimelineItemTitle>
+                Institutions net-settle with each other in USDT
+              </TimelineItemTitle>
+            </TimelineItem>
+          </Timeline>
+        </TimelineCard>
+      </Grid>
+    </Stack>
+  </Section>
+
+  <!-------------------------------- HOW IT WORKS -------------------------------->
+
+  <Section container>
+    <SectionHeader>
+      <SectionTitle> International payments that feel local </SectionTitle>
+      <SectionDescription>
+        A single network that lets institutions collect, settle, and pay out
+        across borders.
+      </SectionDescription>
+    </SectionHeader>
+  </Section>
+
+  <!---------------------------------- USE CASES --------------------------------->
+
+  <Section variant="accented">
+    <Grid columns={2} container responsive>
+      <SectionHeader className="flex-1" align="left">
+        <SectionTitle>
+          Powered by Tether. Built for institutions.
+        </SectionTitle>
+
+        <SectionDescription className="mb-6">
+          t-0 is strategically backed by Tether to bring USDT's deep global
+          liquidity to regulated financial institutions. We provide the
+          compliant, institutional-grade layer that makes stablecoin settlement
+          a reality for global finance.
+        </SectionDescription>
+
+        <Statistic
+          client:visible
+          statistic={0.82}
+          animated
+          formatOptions={{ style: "percent" }}
+          label="of global stablecoin volume flows through USDT"
+        />
+      </SectionHeader>
+
+      <ItemGroup className="[&_a]:h-auto [&_a]:p-0">
+        <Item size="lg" className="max-md:flex-col">
+          <ItemMedia>
+            <Bank />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle> For banks </ItemTitle>
+            <ItemDescription className="line-clamp-none">
+              Optimise liquidity and reduce FX exposure through instant, low
+              cost, stablecoin net settlement.
+            </ItemDescription>
+            <ItemActions>
+              <Link href="#">
+                Learn more
+                <CaretRight />
+              </Link>
+            </ItemActions>
+          </ItemContent>
+        </Item>
+
+        <ItemSeparator />
+
+        <Item size="lg" className="max-md:flex-col">
+          <ItemMedia>
+            <Pipeline />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle> For fintechs </ItemTitle>
+            <ItemDescription className="max-md:line-clamp-none">
+              Grow revenue, expand currency coverage and unlock new payment
+              corridors powered by USDT liquidity.
+            </ItemDescription>
+            <ItemActions>
+              <Link href="#">
+                Learn more
+                <CaretRight />
+              </Link>
+            </ItemActions>
+          </ItemContent>
+        </Item>
+
+        <ItemSeparator />
+
+        <Item size="lg" className="max-md:flex-col">
+          <ItemMedia>
+            <CC />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle> For payment platforms </ItemTitle>
+            <ItemDescription className="max-md:line-clamp-none">
+              Collect and pay out globally through a single API, simplifying
+              treasury and reconciliation.
+            </ItemDescription>
+            <ItemActions>
+              <Link href="#">
+                Learn more
+                <CaretRight />
+              </Link>
+            </ItemActions>
+          </ItemContent>
+        </Item>
+      </ItemGroup>
+    </Grid>
+  </Section>
+
+  <!---------------------------------- QUOTATION --------------------------------->
+
+  <Section>
+    <Stack
+      className="mx-auto max-w-3xl"
+      align="center"
+      gap="none"
+      orientation="column"
+    >
+      <Image
+        alt="Glowing quotation mark"
+        src={quote}
+        width={72}
+        layout="fixed"
+        class="-mb-4"
+      />
+      <Blockquote>
+        <blockquote>
+          USDT has become the world’s leading stablecoin because it solves real
+          problems. Our investment makes T-0 the first network to prioritise
+          USDT liquidity for real-world settlement - <strong>
+            bringing compliant, programmable cross-border payments to
+            institutions, especially in emerging markets where stable, efficient
+            infrastructure matters most.
+          </strong>
+        </blockquote>
+        <BlockquoteAuthor name="Paolo Ardoino" title="CEO of Tether" />
+      </Blockquote>
+    </Stack>
+  </Section>
+
+  <!--------------------------------- CURRENCIES --------------------------------->
+
+  <Section className="mx-auto flex max-w-5xl flex-col justify-center">
+    <SectionHeader>
+      <SectionTitle> Seamless movement between 1,200+ FX pairs </SectionTitle>
+      <SectionDescription>
+        On t-0, there are no 'hard' currency pairs. Our correspondent model
+        allows you to pair any two supported currencies, creating 1200+ possible
+        corridors for instant, low cost payments.
+      </SectionDescription>
+    </SectionHeader>
+
+    <div class="relative w-full">
+      <ProgressiveBlur
+        blurLevels={[0, 1, 2, 4, 6]}
+        height="100%"
+        className="absolute top-0 bottom-0 left-1/2 w-screen -translate-x-1/2"
+      />
+
+      <Link
+        variant="default"
+        size="lg"
+        className="absolute bottom-16 left-1/2 z-30 -translate-x-1/2"
+      >
+        <LockOpen />
+        Unlock all currencies
+      </Link>
+
+      <Grid
+        columns={3}
+        className="relative w-full mask-b-to-transparent pb-16 max-md:grid-cols-2 max-sm:grid-cols-1"
+      >
+        {
+          CURRENCIES.map(({ flag: Flag, ...currency }) => (
+            <Stack orientation="row" align="center" className="p-4 w-full">
+              <Flag className="size-10 rounded-full" />
+              <div>
+                <Typography variant="title" size="md">
+                  {currency.currencyCode}
+                </Typography>
+                <Typography variant="body" size="md" color="secondary">
+                  {currency.name}
+                </Typography>
+              </div>
+            </Stack>
+          ))
+        }
+      </Grid>
+    </div>
+  </Section>
+
+  <Section>
+    <Grid columns={2} responsive container>
+      <SectionHeader align="left">
+        <SectionTitle className="max-w-sm">
+          Frequently Asked Questions
+        </SectionTitle>
+      </SectionHeader>
+
+      <FAQ questions={faq} client:visible />
+    </Grid>
+  </Section>
+
+  <Section
+    className="bg-primary relative inset-shadow-[0_12px_24px] inset-shadow-black/30"
   >
-    Hero text
-  </Typography>
+    <SectionHeader align="center" className="dark relative z-20">
+      <SectionTitle
+        variant="display"
+        size="lg"
+        className="max-w-4xl text-6xl text-shadow-[0_12px_24px] text-shadow-black/30"
+      >
+        Join the world's most liquid settlement network
+      </SectionTitle>
+
+      <Link variant="default" className="dark mt-4 bg-sky-300 text-sky-900!">
+        Access the network
+        <CaretRight />
+      </Link>
+    </SectionHeader>
+
+    <Noise class="absolute inset-0 z-10 bg-black/30" />
+
+    <Rive
+      src={bottomCTA}
+      fit="cover"
+      className="pointer-events-none absolute inset-0 w-full"
+      client:only="react"
+    />
+  </Section>
 </PageLayout>
