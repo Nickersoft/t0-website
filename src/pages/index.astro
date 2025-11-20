@@ -31,6 +31,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card";
+import { GlobeVisual } from "@/components/GlobeVisual";
 import { Grid } from "@/components/ui/Grid";
 import { Statistic } from "@/components/ui/Statistic";
 import { Stack } from "@/components/ui/Stack";
@@ -314,8 +315,9 @@ const CURRENCIES = [
 
   <!-------------------------------- HOW IT WORKS -------------------------------->
 
-  <Section container>
-    <SectionHeader>
+  <Section className="px-0">
+    <GlobeVisual client:idle />
+    <SectionHeader className="container px-8">
       <SectionTitle> International payments that feel local </SectionTitle>
       <SectionDescription>
         A single network that lets institutions collect, settle, and pay out
@@ -327,7 +329,7 @@ const CURRENCIES = [
   <!---------------------------------- USE CASES --------------------------------->
 
   <Section variant="accented">
-    <Grid columns={2} container responsive>
+    <Grid columns={2} alignItems="center" container responsive>
       <SectionHeader className="flex-1" align="left">
         <SectionTitle>
           Powered by Tether. Built for institutions.
@@ -449,7 +451,7 @@ const CURRENCIES = [
 
   <Section className="mx-auto flex max-w-5xl flex-col justify-center">
     <SectionHeader>
-      <SectionTitle> Seamless movement between 1,200+ FX pairs </SectionTitle>
+      <SectionTitle> Seamless movement between 1200+ FX pairs </SectionTitle>
       <SectionDescription>
         On t-0, there are no 'hard' currency pairs. Our correspondent model
         allows you to pair any two supported currencies, creating 1200+ possible

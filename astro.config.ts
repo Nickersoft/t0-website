@@ -43,6 +43,20 @@ export default defineConfig({
         },
       }),
     ],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            three: [
+              "react",
+              "three",
+              "@react-three/fiber",
+              "@react-three/drei",
+            ],
+          },
+        },
+      },
+    },
   },
   integrations: [
     react(),

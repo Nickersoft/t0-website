@@ -8,6 +8,8 @@ interface NumberTickerProps extends ComponentPropsWithoutRef<"span"> {
   startValue?: number;
   formatOptions?: Intl.NumberFormatOptions;
   direction?: "up" | "down";
+  damping?: number;
+  stiffness?: number;
   delay?: number;
 }
 
@@ -15,20 +17,16 @@ export function NumberTicker({
   value,
   startValue = 0,
   direction = "up",
+  damping = 60,
+  stiffness = 100,
   delay = 0,
   className,
   formatOptions,
   ...props
 }: NumberTickerProps) {
   const ref = useRef<HTMLSpanElement>(null);
-
   const motionValue = useMotionValue(direction === "down" ? value : startValue);
-
-  const springValue = useSpring(motionValue, {
-    damping: 60,
-    stiffness: 100,
-  });
-
+  const springValue = useSpring(motionValue, { damping, stiffness });
   const isInView = useInView(ref, { once: true, margin: "0px" });
 
   useEffect(() => {
