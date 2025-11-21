@@ -9,7 +9,7 @@ import robots from "astro-robots";
 import { FileSystemIconLoader } from "unplugin-icons/loaders";
 import icons from "unplugin-icons/vite";
 
-const ORIGIN = "TODO.com";
+const ORIGIN = "t-0.network";
 
 // https://astro.build/config
 export default defineConfig({

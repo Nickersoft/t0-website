@@ -42,7 +42,10 @@ import { Image } from "astro:assets";
 const team = await getCollection("team");
 ---
 
-<LegalLayout title="About Us">
+<LegalLayout
+  title="About Us"
+  description="t-0 Network is on a mission to unlock a world of borderless economic connection."
+>
   <Grid
     columns="200px auto"
     gap="none"

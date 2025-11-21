@@ -42,6 +42,7 @@ const links = [
         links.map((link) => (
           <li>
             <a
+              title={link.label}
               class={cn(
                 buttonVariants({ variant: "link" }),
                 "text-muted-foreground hover:text-secondary-foreground",
@@ -55,7 +56,9 @@ const links = [
       }
 
       <li>
-        <Link variant="ghost">Access network</Link>
+        <Link href="/access" title="Access network" variant="ghost">
+          Access network
+        </Link>
       </li>
     </ul>
   </Stack>

@@ -52,13 +52,17 @@ const rightConnections: Connection[] = [
 >
   <Noise class="absolute inset-0" />
 
-  <Grid columns="1fr auto 1fr" className="h-full max-md:grid-cols-1">
+  <Grid
+    columns="1fr 800px 1fr"
+    gap="none"
+    className="h-full max-md:grid-cols-1"
+  >
     <!-- Left Map -->
     <div
       class="relative size-full max-md:absolute max-md:top-0 max-md:left-1/2 max-md:z-1 max-md:-translate-x-1/2 max-md:opacity-10"
     >
       <div
-        class="pointer-events-none absolute top-4 right-0 bottom-0 aspect-[2] h-[100cqh] -translate-x-4"
+        class="pointer-events-none absolute top-4 right-0 bottom-0 aspect-[2] h-[100cqh] translate-x-12"
       >
         <DottedMap
           mapSamples={4000}
@@ -75,7 +79,7 @@ const rightConnections: Connection[] = [
     <!-- Right Map -->
     <div class="relative size-full">
       <div
-        class="pointer-events-none absolute top-4 bottom-0 left-0 aspect-[2] h-[100cqh] -translate-x-16 max-md:hidden"
+        class="pointer-events-none absolute top-4 bottom-0 left-0 aspect-[2] h-[100cqh] -translate-x-28 max-md:hidden"
       >
         <DottedMap
           mapSamples={4000}

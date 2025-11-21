@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 
 // Rive
 import bottomCTA from "@/assets/riv/cta-bg.riv?url";
+import howItWorks from "@/assets/riv/how-it-works.riv?url";
 
 // Icons
 import { LockOpen, CaretRight } from "@/icons";
@@ -102,11 +103,16 @@ const CURRENCIES = [
   .filter(Boolean);
 ---
 
-<PageLayout title="Home">
+<PageLayout
+  title="t-0 Network | Money without borders"
+  description="T-0 enables financial institutions to move money instantly, at low cost, with settlement powered by stablecoin infrastructure."
+>
   <!------------------------------------ HERO ------------------------------------>
 
   <HomepageHero>
-    <SectionHeader className="relative z-10 h-full justify-center-safe py-40">
+    <SectionHeader
+      className="relative z-10 h-full justify-center-safe px-8 py-40"
+    >
       <SectionTitle
         className="dark blur-in motion-safe:animate-in fade-in zoom-in-105 fill-mode-both duration-1500 ease-out"
         variant="display"
@@ -125,8 +131,10 @@ const CURRENCIES = [
         stablecoin settlement network. Built for institutions. Powered by USDT.
       </SectionDescription>
       <Link
+        title="Access the network"
+        href="/access"
         variant="default"
-        className="dark motion-safe:animate-in slide-in-from-bottom-25 fade-in fill-mode-both animation-duration-[1500ms] my-8 block bg-sky-300 text-sky-900! ease-out motion-safe:[animation-delay:500ms]"
+        className="dark motion-safe:animate-in slide-in-from-bottom-25 fade-in fill-mode-both animation-duration-[1500ms] my-8 bg-sky-300 text-sky-900! ease-out motion-safe:[animation-delay:500ms]"
       >
         Access the network
         <CaretRight />
@@ -161,6 +169,7 @@ const CURRENCIES = [
     >
       <Card size="sm">
         <Image
+          title="Moving money"
           class="mb-4"
           alt="Moving money"
           src={transfers}
@@ -178,6 +187,7 @@ const CURRENCIES = [
       </Card>
       <Card size="sm">
         <Image
+          title="FX symbol slashed by beam"
           class="mb-4"
           alt="FX symbol slashed by beam"
           src={fx}
@@ -195,8 +205,9 @@ const CURRENCIES = [
       </Card>
       <Card size="sm">
         <Image
+          title="t-0 routing traffic"
           class="mb-4"
-          alt="T-0 routing traffic"
+          alt="t-0 routing traffic"
           src={revenue}
           layout="full-width"
         />
@@ -211,6 +222,7 @@ const CURRENCIES = [
       </Card>
       <Card size="sm">
         <Image
+          title="Foreign currency symbols"
           class="mb-4"
           alt="Foreign currency symbols"
           src={markets}
@@ -310,6 +322,16 @@ const CURRENCIES = [
           </Timeline>
         </TimelineCard>
       </Grid>
+
+      <Link
+        title="Get best rates"
+        className="mt-8"
+        size="lg"
+        href="/access"
+        variant="default"
+      >
+        Get best rates <CaretRight />
+      </Link>
     </Stack>
   </Section>
 
@@ -324,6 +346,12 @@ const CURRENCIES = [
         across borders.
       </SectionDescription>
     </SectionHeader>
+
+    <div class="container">
+      <Card>
+        <Rive className="aspect-[2.1]" src={howItWorks} client:only="react" />
+      </Card>
+    </div>
   </Section>
 
   <!---------------------------------- USE CASES --------------------------------->
@@ -363,7 +391,7 @@ const CURRENCIES = [
               cost, stablecoin net settlement.
             </ItemDescription>
             <ItemActions>
-              <Link href="#">
+              <Link title="Learn more" href="/access">
                 Learn more
                 <CaretRight />
               </Link>
@@ -384,7 +412,7 @@ const CURRENCIES = [
               corridors powered by USDT liquidity.
             </ItemDescription>
             <ItemActions>
-              <Link href="#">
+              <Link title="Learn more" href="/access">
                 Learn more
                 <CaretRight />
               </Link>
@@ -405,7 +433,7 @@ const CURRENCIES = [
               treasury and reconciliation.
             </ItemDescription>
             <ItemActions>
-              <Link href="#">
+              <Link title="Learn more" href="/access">
                 Learn more
                 <CaretRight />
               </Link>
@@ -420,12 +448,13 @@ const CURRENCIES = [
 
   <Section>
     <Stack
-      className="mx-auto max-w-3xl"
+      className="mx-auto max-w-3xl px-6"
       align="center"
       gap="none"
       orientation="column"
     >
       <Image
+        title="Glowing quotation mark"
         alt="Glowing quotation mark"
         src={quote}
         width={72}
@@ -449,7 +478,7 @@ const CURRENCIES = [
 
   <!--------------------------------- CURRENCIES --------------------------------->
 
-  <Section className="mx-auto flex max-w-5xl flex-col justify-center">
+  <Section className="mx-auto flex max-w-5xl flex-col justify-center px-6">
     <SectionHeader>
       <SectionTitle> Seamless movement between 1200+ FX pairs </SectionTitle>
       <SectionDescription>
@@ -469,6 +498,8 @@ const CURRENCIES = [
       <Link
         variant="default"
         size="lg"
+        title="Unlock all currencies"
+        href="/access"
         className="absolute bottom-16 left-1/2 z-30 -translate-x-1/2"
       >
         <LockOpen />
@@ -477,7 +508,7 @@ const CURRENCIES = [
 
       <Grid
         columns={3}
-        className="relative w-full mask-b-to-transparent pb-16 max-md:grid-cols-2 max-sm:grid-cols-1"
+        className="relative max-h-150 w-full overflow-hidden mask-b-to-transparent pb-16 max-md:grid-cols-2 max-sm:grid-cols-1"
       >
         {
           CURRENCIES.map(({ flag: Flag, ...currency }) => (
@@ -522,7 +553,12 @@ const CURRENCIES = [
         Join the world's most liquid settlement network
       </SectionTitle>
 
-      <Link variant="default" className="dark mt-4 bg-sky-300 text-sky-900!">
+      <Link
+        href="/access"
+        title="Access the network"
+        variant="default"
+        className="dark mt-4 bg-sky-300 text-sky-900!"
+      >
         Access the network
         <CaretRight />
       </Link>

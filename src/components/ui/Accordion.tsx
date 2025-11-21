@@ -27,12 +27,12 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        "grid grid-cols-[auto_1fr] items-center gap-4 py-4 text-left text-sm font-medium transition-all hover:underline [&[data-state=open]_svg]:rotate-180",
+        "grid grid-cols-[auto_1fr] items-start gap-4 py-4 text-left text-sm font-medium transition-all hover:underline [&[data-state=open]_svg]:rotate-180",
         className,
       )}
       {...props}
     >
-      <div className="text-primary-foreground from-primary flex size-6 items-center justify-center rounded-full bg-linear-to-b to-green-800">
+      <div className="text-primary-foreground from-primary mt-1 flex size-6 items-center justify-center rounded-full bg-linear-to-b to-green-800">
         <CaretDown className="size-4 shrink-0 transition-transform duration-200" />
       </div>
       {children}

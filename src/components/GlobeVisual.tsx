@@ -164,7 +164,7 @@ function GlobeScene() {
     <>
       <OrthographicCamera
         ref={cameraRef}
-        zoom={8}
+        zoom={12}
         makeDefault
         near={0.1}
         far={20}

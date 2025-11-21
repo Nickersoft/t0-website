@@ -35,7 +35,7 @@ export function SectionHeader({
   );
 }
 
-const sectionVariants = cva("px-8 py-24", {
+const sectionVariants = cva("py-24", {
   variants: {
     container: {
       true: "container",

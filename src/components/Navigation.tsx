@@ -1,29 +1,24 @@
 import { useIsScrolling } from "@/hooks/useIsScrolling";
-import {
-  Button,
-  buttonVariants,
-  type ButtonProps,
-} from "@/components//ui/Button";
-import { Stack } from "@/components//ui/Stack";
+
+import { Button } from "@/components/ui/Button";
+import { Stack } from "@/components/ui/Stack";
+import { Link, type LinkProps } from "@/components/ui/Link";
 import { MobileNavigation } from "@/components/ui/MobileNavigation";
 
 import { cn } from "@/lib/utils";
 
 import Logo from "~icons/assets/t0";
-import type React from "react";
-import { Link, type LinkProps } from "./ui/Link";
 
-const links = [
-  {
-    href: "/about",
-    label: "About Us",
-  },
-];
-
-function NavigationItem({ children, className, href, ...props }: LinkProps) {
+function NavigationItem({
+  children,
+  className,
+  href,
+  ...props
+}: LinkProps & { children: string }) {
   return (
     <Link
       {...props}
+      title={children}
       className={cn("max-md:w-full max-md:justify-start", className)}
       href={href}
     >
@@ -51,7 +46,7 @@ export function Navigation() {
           align="center"
           className="container h-full py-8"
         >
-          <a href="/">
+          <a href="/" title="Logo">
             <Logo className="h-28 w-36" />
           </a>
 
@@ -73,7 +68,7 @@ export function Navigation() {
                 <NavigationItem
                   href="/access"
                   variant="default"
-                  className="max-md:mt-8 max-md:w-full min-[25rem]:hidden md:block"
+                  className="max-md:mt-2 max-md:w-full min-[25rem]:hidden md:block"
                 >
                   Access network
                 </NavigationItem>
