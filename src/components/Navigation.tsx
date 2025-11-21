@@ -1,22 +1,36 @@
 import { useIsScrolling } from "@/hooks/useIsScrolling";
-import { Button, buttonVariants } from "@/components//ui/Button";
+import {
+  Button,
+  buttonVariants,
+  type ButtonProps,
+} from "@/components//ui/Button";
 import { Stack } from "@/components//ui/Stack";
 import { MobileNavigation } from "@/components/ui/MobileNavigation";
 
 import { cn } from "@/lib/utils";
 
 import Logo from "~icons/assets/t0";
+import type React from "react";
+import { Link, type LinkProps } from "./ui/Link";
 
 const links = [
   {
     href: "/about",
     label: "About Us",
   },
-  {
-    href: "/contact",
-    label: "Contact",
-  },
 ];
+
+function NavigationItem({ children, className, href, ...props }: LinkProps) {
+  return (
+    <Link
+      {...props}
+      className={cn("max-md:w-full max-md:justify-start", className)}
+      href={href}
+    >
+      {children}
+    </Link>
+  );
+}
 
 export function Navigation() {
   const height = 72;
@@ -49,29 +63,20 @@ export function Navigation() {
             <MobileNavigation navigationHeight={height}>
               <ul
                 className={cn(
-                  "flex flex-row gap-2 text-sm font-medium",
+                  "flex flex-row gap-3 text-sm font-medium",
                   "max-md:container max-md:w-full max-md:flex-col max-md:items-stretch max-md:p-4",
                 )}
               >
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      className={cn(
-                        buttonVariants({ variant: "ghost" }),
-                        "text-muted-foreground hover:text-primary max-md:w-full max-md:justify-start",
-                      )}
-                      href={link.href}
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-
-                <li>
-                  <Button className="max-md:mt-8 max-md:w-full min-[25rem]:hidden md:block">
-                    Access network
-                  </Button>
-                </li>
+                <NavigationItem variant="ghost" href="/about">
+                  About Us
+                </NavigationItem>
+                <NavigationItem
+                  href="/access"
+                  variant="default"
+                  className="max-md:mt-8 max-md:w-full min-[25rem]:hidden md:block"
+                >
+                  Access network
+                </NavigationItem>
               </ul>
             </MobileNavigation>
           </Stack>
