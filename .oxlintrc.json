@@ -1,3 +1,4 @@
 {
-  "plugins": ["import", "react", "react-perf", "vitest"]
+  "plugins": ["import", "react", "react-perf", "vitest"],
+  "ignorePatterns": ["**/*.astro"]
 }

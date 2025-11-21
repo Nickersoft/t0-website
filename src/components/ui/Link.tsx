@@ -2,7 +2,7 @@ import type { VariantProps } from "class-variance-authority";
 import type { ComponentPropsWithoutRef } from "react";
 import { Button, type buttonVariants } from "./Button";
 
-interface LinkProps
+export interface LinkProps
   extends Omit<ComponentPropsWithoutRef<"a">, "color">,
     VariantProps<typeof buttonVariants> {}
 

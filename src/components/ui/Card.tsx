@@ -8,6 +8,10 @@ const cardVariants = cva(
   "group/card py-(--s) gap-(--s) text-card-foreground rounded-2xl",
   {
     variants: {
+      container: {
+        true: "container",
+        false: "",
+      },
       variant: {
         default: "bg-card text-card-foreground border shadow-md",
         outline: "border",
@@ -29,13 +33,14 @@ const cardVariants = cva(
 function Card({
   className,
   variant,
+  container,
   size,
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof cardVariants>) {
   return (
     <div
       data-variant={variant}
-      className={cn(cardVariants({ size, variant }), className)}
+      className={cn(cardVariants({ container, size, variant }), className)}
       {...props}
     />
   );

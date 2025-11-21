@@ -30,7 +30,7 @@ export function GradientBorder({
     <Tag
       className={cn(
         "relative",
-        "before:absolute before:border-solid before:border-[transparent] before:inset-[calc(-1*var(--width))] before:rounded-[inherit]",
+        "before:absolute before:inset-[calc(-1*var(--width))] before:rounded-[inherit] before:border-solid before:border-[transparent]",
         "before:pointer-events-none",
         "before:[mask-image:linear-gradient(#000_0_0),linear-gradient(#000_0_0)]",
         "before:[mask-clip:content-box,no-clip]",
