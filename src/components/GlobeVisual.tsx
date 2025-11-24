@@ -2,7 +2,7 @@ import * as React from "react";
 import * as THREE from "three";
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrthographicCamera } from "@react-three/drei";
+import { PerspectiveCamera } from "@react-three/drei";
 
 const DETAIL = 32;
 const GLOBE_COLOR = "#E5E7EB";
@@ -64,7 +64,7 @@ function MeridianLine({ ref, angle, color, delay }: MeridianLineProps) {
   void main() {
     float gradientPosition = mod(vPosition - (uTime + uDelay) * uGradientSpeed, 1.0);
     // Shorter gradient: tighter smoothstep range creates a more compact highlight
-    float gradientIntensity = smoothstep(0.78, 0.88, gradientPosition) * smoothstep(0.98, 0.88, gradientPosition);
+    float gradientIntensity = smoothstep(0.78, 0.80, gradientPosition) * smoothstep(0.82, 0.80, gradientPosition);
     vec3 finalColor = mix(uBaseColor, uHighlightColor, clamp(gradientIntensity, 0.0, 1.0));
     gl_FragColor = vec4(finalColor, 1.0);
   }
@@ -74,10 +74,11 @@ function MeridianLine({ ref, angle, color, delay }: MeridianLineProps) {
       uDelay: { value: delay },
       uBaseColor: { value: new THREE.Color(GLOBE_COLOR) },
       uHighlightColor: { value: new THREE.Color(color) },
-      uGradientSpeed: { value: 0.4 },
+      uGradientSpeed: { value: 0.2 },
     },
+    toneMapped: false,
     transparent: false,
-    blending: THREE.AdditiveBlending,
+    // blending: THREE.AdditiveBlending,
   });
 
   return <primitive ref={ref} object={new THREE.Mesh(geometry, material)} />;
@@ -110,16 +111,18 @@ function MeridianLines() {
     });
   });
 
+  const lines = DETAIL / 2;
+
   return (
     <group ref={groupRef}>
-      {Array.from({ length: DETAIL })
+      {Array.from({ length: lines })
         .fill(null)
         .map((_, i) => (
           <MeridianLine
             ref={lineRefs[i]}
-            angle={(i / DETAIL) * Math.PI * 2}
+            angle={(i / lines) * Math.PI * 2}
             key={`meridian-${i}`}
-            color={i % 2 === 0 ? "#16A34A" : "#0369A1"}
+            color={i % 2 === 0 ? "#22C55E" : "#0EA5E9"}
             delay={Math.random() * 2}
           />
         ))}
@@ -130,50 +133,34 @@ function MeridianLines() {
 function GlobeScene() {
   const sceneTimeRef = React.useRef(0);
   const meshRef = React.useRef<THREE.Group>(null);
-  const cameraRef = React.useRef<THREE.OrthographicCamera>(null);
+  const cameraRef = React.useRef<THREE.PerspectiveCamera>(null);
 
-  const { viewport } = useThree();
-
-  // Calculate dynamic zoom to make globe fill viewport width
   const radius = 1; // Globe radius is 1, so diameter is 2
-  // const zoom = viewport.width / (radius * 6);
-
-  // Update camera frustum and zoom when viewport changes (window resize)
-  React.useEffect(() => {
-    if (cameraRef.current) {
-      const aspect = viewport.width / viewport.height;
-      const frustumSize = 3;
-
-      cameraRef.current.left = (-frustumSize * aspect) / 2;
-      cameraRef.current.right = (frustumSize * aspect) / 2;
-      cameraRef.current.top = frustumSize / 2;
-      cameraRef.current.bottom = -frustumSize / 2;
-
-      cameraRef.current.updateProjectionMatrix();
-    }
-  }, [viewport.width, viewport.height]);
 
   useFrame(() => {
     sceneTimeRef.current += 0.008;
     if (meshRef.current) {
-      meshRef.current.rotation.x = sceneTimeRef.current * 0.1;
+      meshRef.current.rotation.y = sceneTimeRef.current * 0.1;
+      console.log(meshRef.current.rotation.x);
     }
   });
 
   return (
     <>
-      <OrthographicCamera
+      <PerspectiveCamera
         ref={cameraRef}
-        zoom={12}
         makeDefault
+        fov={75}
+        zoom={8}
+        position={[0, 0, 1.8]}
         near={0.1}
         far={20}
       />
 
       <ambientLight intensity={0.5} color="#fff" />
 
-      <group position={[0, -0.88, 0]} ref={meshRef}>
-        <mesh geometry={new THREE.IcosahedronGeometry(radius, DETAIL / 2)}>
+      <group position={[0, -0.88, 0]} ref={meshRef} rotation={[-0.05, 0, 0]}>
+        <mesh geometry={new THREE.IcosahedronGeometry(radius, DETAIL)}>
           <meshStandardMaterial
             color={GLOBE_COLOR}
             wireframe={true}

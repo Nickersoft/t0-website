@@ -39,7 +39,9 @@ import LegalLayout from "@/layouts/LegalLayout.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
-const team = await getCollection("team");
+const team = await getCollection("team").then((team) =>
+  team.sort((a, b) => a.data.order - b.data.order),
+);
 ---
 
 <LegalLayout
@@ -189,7 +191,7 @@ const team = await getCollection("team");
 
   <!---------------------------------- INVESTORS --------------------------------->
 
-  <Section>
+  <Section className="pt-0">
     <SectionHeader>
       <SectionTitle>Our Investors</SectionTitle>
     </SectionHeader>

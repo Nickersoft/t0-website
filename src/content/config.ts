@@ -12,6 +12,7 @@ const team = defineCollection({
   loader: glob({ pattern: "*.yml", base: "src/data/team" }),
   schema: ({ image }) =>
     z.object({
+      order: z.number(),
       image: image(),
       name: z.string(),
       title: z.string(),
