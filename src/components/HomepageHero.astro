@@ -50,11 +50,11 @@ const rightConnections: Connection[] = [
 >
   <Noise class="absolute inset-0" />
 
-  <div class="flex h-full flex-row items-center justify-center -space-x-48">
+  <div class="flex h-full flex-row items-center justify-center md:-space-x-48">
     <!-- Left Map -->
 
     <div
-      class="pointer-events-none aspect-[2] h-[100cqh] shrink-0 translate-y-8 md:-translate-x-12"
+      class="pointer-events-none aspect-[2] h-[100cqh] shrink-0 translate-y-8 max-md:absolute max-md:z-10 max-md:opacity-30 md:-translate-x-12"
     >
       <DottedMap
         class="text-primary-foreground/30"
@@ -66,7 +66,7 @@ const rightConnections: Connection[] = [
       />
     </div>
 
-    <div class="shrink-0">
+    <div class="max-md:w-full md:shrink-0">
       <slot />
     </div>
 
