@@ -349,7 +349,12 @@ const CURRENCIES = [
 
     <div class="container">
       <Card>
-        <Rive className="aspect-[2.1]" src={howItWorks} client:only="react" />
+        <Rive
+          playMode="in-view"
+          className="aspect-[2.1]"
+          src={howItWorks}
+          client:only="react"
+        />
       </Card>
     </div>
   </Section>

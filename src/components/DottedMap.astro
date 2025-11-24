@@ -16,6 +16,7 @@ export interface Props {
   dotColor?: string;
   lineColor?: string;
   dotRadius?: number;
+  stagger?: boolean;
   class?: string;
 }
 
@@ -27,19 +28,15 @@ const {
   dotColor = "currentColor",
   lineColor = "#0ea5e9",
   dotRadius = 0.2,
+  stagger = false,
   class: className,
 } = Astro.props;
 
-// Generate map data server-side
-const { points, addMarkers } = createMap({
+const map = createMap({
   width,
   height,
   mapSamples,
 });
-
-const markers = addMarkers(
-  connections.flatMap(({ end, start }) => [start, end]),
-);
 
 // Create curved path helper
 function createCurvedPath(
@@ -58,6 +55,55 @@ function createCurvedPath(
     })
     .toString();
 }
+
+function getSteps(points: { x: number; y: number }[]) {
+  const sorted = [...points].sort((a, b) => a.y - b.y || a.x - b.x);
+  const rowMap = new Map<number, number>();
+
+  let step = 0;
+  let prevY = Number.NaN;
+  let prevXInRow = Number.NaN;
+
+  for (const p of sorted) {
+    if (p.y !== prevY) {
+      // new row
+      prevY = p.y;
+      prevXInRow = Number.NaN;
+
+      if (!rowMap.has(p.y)) {
+        rowMap.set(p.y, rowMap.size);
+      }
+    }
+
+    if (!Number.isNaN(prevXInRow)) {
+      const delta = p.x - prevXInRow;
+
+      if (delta > 0) {
+        step = step === 0 ? delta : Math.min(step, delta);
+      }
+    }
+
+    prevXInRow = p.x;
+  }
+
+  return { xStep: step || 1, yToRowIndex: rowMap };
+}
+
+const { xStep, yToRowIndex } = getSteps(map.points);
+
+const points = map.points.map((point) => {
+  const rowIndex = yToRowIndex.get(point.y) ?? 0;
+  const staggerX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0;
+  return { ...point, x: point.x + staggerX };
+});
+
+const markers = map
+  .addMarkers(connections.flatMap(({ end, start }) => [start, end]))
+  .map((marker) => {
+    const rowIndex = yToRowIndex.get(marker.y) ?? 0;
+    const staggerX = stagger && rowIndex % 2 === 1 ? xStep / 2 : 0;
+    return { ...marker, x: marker.x + staggerX };
+  });
 
 // Prepare canvas data for web component
 const canvasData = {
@@ -221,6 +267,7 @@ const canvasData = {
 
       this.canvasData.points.forEach((point) => {
         ctx.beginPath();
+
         ctx.arc(
           point.x * scaleX + offsetX,
           point.y * scaleY + offsetY,

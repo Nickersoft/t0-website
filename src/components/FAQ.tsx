@@ -12,7 +12,7 @@ interface FAQProps {
 
 export function FAQ({ questions }: FAQProps) {
   return (
-    <Accordion type="single">
+    <Accordion type="multiple">
       {questions.map((question) => (
         <AccordionItem value={question.id} key={question.id}>
           <AccordionTrigger className="text-lg">

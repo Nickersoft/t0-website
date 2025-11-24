@@ -10,6 +10,7 @@ import {
   useRive,
 } from "@rive-app/react-webgl2";
 import { animate } from "motion";
+import { inView } from "motion/react";
 
 RuntimeLoader.setWasmUrl(RIVE_WASM_URL);
 
@@ -35,6 +36,7 @@ const alignmentMap = {
 export type RiveProps = ComponentProps<"canvas"> & {
   src: string;
   artboard?: string;
+  playMode?: "in-view" | "autoplay";
   params?: Partial<
     Omit<NonNullable<UseRiveParameters>, "artboard" | "layout" | "src">
   > | null;
@@ -44,6 +46,7 @@ export type RiveProps = ComponentProps<"canvas"> & {
 
 export function Rive({
   fit,
+  playMode = "autoplay",
   alignment,
   params,
   artboard,
@@ -58,7 +61,7 @@ export function Rive({
       src,
       artboard,
       stateMachines: params?.stateMachines ?? "State Machine 1",
-      autoplay: true,
+      autoplay: playMode === "autoplay",
       autoBind: true,
       layout: new Layout({
         ...(fit && { fit: fitMap[fit] }),
@@ -67,6 +70,30 @@ export function Rive({
       onLoad: (e) => {
         animate(container as HTMLElement, { opacity: [0, 1] });
         onLoad(e);
+      },
+      onRiveReady(rive) {
+        function bindViewModel() {
+          const vm = rive.defaultViewModel();
+          const vmi = vm?.defaultInstance();
+
+          if (!vmi) return;
+
+          rive.bindViewModelInstance(vmi);
+        }
+
+        if (playMode === "in-view") {
+          inView(
+            container as HTMLElement,
+            () => {
+              rive.play();
+              return () => {
+                rive.reset();
+                bindViewModel();
+              };
+            },
+            { amount: 0.5 },
+          );
+        }
       },
     },
     { shouldUseIntersectionObserver: true },

@@ -1,6 +1,4 @@
 ---
-import { Grid } from "@/components/ui/Grid";
-
 import DottedMap, { type Connection } from "./DottedMap.astro";
 import Noise from "./Noise.astro";
 
@@ -52,43 +50,38 @@ const rightConnections: Connection[] = [
 >
   <Noise class="absolute inset-0" />
 
-  <Grid
-    columns="1fr 800px 1fr"
-    gap="none"
-    className="h-full max-md:grid-cols-1"
-  >
+  <div class="flex h-full flex-row items-center justify-center -space-x-48">
     <!-- Left Map -->
+
     <div
-      class="relative size-full max-md:absolute max-md:top-0 max-md:left-1/2 max-md:z-1 max-md:-translate-x-1/2 max-md:opacity-10"
+      class="pointer-events-none aspect-[2] h-[100cqh] shrink-0 translate-y-8 md:-translate-x-12"
     >
-      <div
-        class="pointer-events-none absolute top-4 right-0 bottom-0 aspect-[2] h-[100cqh] translate-x-12"
-      >
-        <DottedMap
-          mapSamples={4000}
-          class="text-primary-foreground/30"
-          dotRadius={0.5}
-          lineColor="#ffffff"
-          connections={leftConnections}
-        />
-      </div>
+      <DottedMap
+        class="text-primary-foreground/30"
+        dotRadius={0.45}
+        stagger
+        lineColor="#ffffff"
+        mapSamples={3500}
+        connections={leftConnections}
+      />
     </div>
 
-    <slot />
+    <div class="shrink-0">
+      <slot />
+    </div>
 
     <!-- Right Map -->
-    <div class="relative size-full">
-      <div
-        class="pointer-events-none absolute top-4 bottom-0 left-0 aspect-[2] h-[100cqh] -translate-x-28 max-md:hidden"
-      >
-        <DottedMap
-          mapSamples={4000}
-          class="text-primary-foreground/30"
-          dotRadius={0.5}
-          lineColor="#ffffff"
-          connections={rightConnections}
-        />
-      </div>
+    <div
+      class="pointer-events-none aspect-[2] h-[100cqh] shrink-0 translate-y-8 max-md:hidden"
+    >
+      <DottedMap
+        stagger
+        mapSamples={3500}
+        class="text-primary-foreground/30"
+        dotRadius={0.45}
+        lineColor="#ffffff"
+        connections={rightConnections}
+      />
     </div>
-  </Grid>
+  </div>
 </div>
