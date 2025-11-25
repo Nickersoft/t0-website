@@ -1,19 +1,41 @@
 ---
 import LegalLayout from "@/layouts/LegalLayout.astro";
+
+import graphic from "@/assets/riv/about.riv";
+import { Rive } from "@/components/ui/Rive";
+import { Grid } from "@/components/ui/Grid";
+import { Card } from "@/components/ui/Card";
 ---
 
 <LegalLayout
   title="Access Network"
   description="Contact us to gain access to the t-0 network."
 >
-  <div class="mx-auto max-w-4xl px-8">
-    <div
-      class="hs-form-frame"
-      data-region="eu1"
-      data-form-id="556d3fa2-0e24-468a-a12b-bf02708ea052"
-      data-portal-id="147297820"
+  <div class="container">
+    <Grid
+      columns={2}
+      responsive
+      className="mt-16 gap-6"
+      justifyItems="stretch"
+      alignItems="stretch"
     >
-    </div>
+      <Card>
+        <div
+          class="hs-form-frame"
+          data-region="eu1"
+          data-form-id="556d3fa2-0e24-468a-a12b-bf02708ea052"
+          data-portal-id="147297820"
+        >
+        </div>
+      </Card>
+
+      <Rive
+        src={graphic}
+        fit="cover"
+        className="pointer-events-none min-h-150 overflow-hidden rounded-[2.5rem]"
+        client:only="react"
+      />
+    </Grid>
   </div>
 
   <script

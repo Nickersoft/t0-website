@@ -124,7 +124,7 @@ const team = await getCollection("team").then((team) =>
       <Card>
         <CardHeader>
           <GlobeDuotone />
-          <CardTitle> Settlement Engine </CardTitle>
+          <CardTitle> Settlement engine </CardTitle>
           <CardDescription>
             A unified global ledger that records all transactions between
             participating FIs, creating the world’s first system for continuous
@@ -201,16 +201,20 @@ const team = await getCollection("team").then((team) =>
       orientation="row"
       className="text-muted-foreground mx-auto max-w-2xl gap-x-16 gap-y-8"
     >
-      <Tether />
-      <Delphi />
+      <a href="https://tether.to">
+        <Tether />
+      </a>
+      <a href="https://delphilabs.io">
+        <Delphi />
+      </a>
     </Stack>
   </Section>
-</LegalLayout>
 
-<style lang="postcss">
+  <style lang="postcss">
   @reference "@/styles/theme.css";
   
   strong {
     @apply text-foreground font-medium;
   }
 </style>
+</LegalLayout>
