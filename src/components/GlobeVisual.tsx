@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as THREE from "three";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
 
 const DETAIL = 32;
