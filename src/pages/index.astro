@@ -38,7 +38,6 @@ import { Statistic } from "@/components/ui/Statistic";
 import { Stack } from "@/components/ui/Stack";
 import {
   Item,
-  ItemActions,
   ItemContent,
   ItemDescription,
   ItemMedia,
@@ -127,16 +126,16 @@ const CURRENCIES = [
         size="lg"
         color="primary"
       >
-        Move money instantly, at low cost, with the world's most liquid
-        stablecoin settlement network. Built for institutions. Powered by USDT.
+        Move money instantly, at low cost, in a peer-to-peer stablecoin
+        settlement network. Built for Institutions. Powered by USDT.
       </SectionDescription>
       <Link
-        title="Access the network"
+        title="Access the Network"
         href="/access"
         variant="default"
         className="motion-safe:animate-in dark slide-in-from-bottom-25 fade-in fill-mode-both animation-duration-[1500ms] my-8 ease-out motion-safe:[animation-delay:500ms]"
       >
-        Access the network
+        Access the Network
         <CaretRight />
       </Link>
       <Typography
@@ -154,9 +153,8 @@ const CURRENCIES = [
     <SectionHeader>
       <SectionTitle> The network for global money movement</SectionTitle>
       <SectionDescription>
-        t-0 connects licensed financial institutions in a peer-to-peer network
-        through a single API to execute cross-border payments settled with
-        stablecoins.
+        t-0 links financial institutions peer-to-peer to make cross-border
+        payments faster, cheaper and more efficient.
       </SectionDescription>
     </SectionHeader>
 
@@ -198,7 +196,7 @@ const CURRENCIES = [
         <CardHeader>
           <CardTitle>Slash FX costs</CardTitle>
           <CardDescription>
-            Execute global transfers for bps, not percentages. You are never
+            Global transfers for basis points, not percentages. You are never
             exposed to the target currency FX rate.
           </CardDescription>
         </CardHeader>
@@ -250,9 +248,8 @@ const CURRENCIES = [
           A <em>swifter</em> way to move money
         </SectionTitle>
         <SectionDescription>
-          Traditional cross-border payments are slowed by legacy infrastructure,
-          creating unnecessary cost and complexity. t-0 network provides a
-          direct, programmable, and more efficient path for money movement.
+          Legacy systems slow global payments. t-0 moves money at the speed of
+          modern business.
         </SectionDescription>
       </SectionHeader>
 
@@ -351,7 +348,7 @@ const CURRENCIES = [
       <Card className="w-full">
         <Rive
           playMode="in-view"
-          className="mx-auto aspect-[2] w-full max-w-250"
+          className="mx-auto aspect-[2.5] w-full"
           src={howItWorks}
           client:only="react"
         />
@@ -395,12 +392,6 @@ const CURRENCIES = [
               Optimise liquidity and reduce FX exposure through instant, low
               cost, stablecoin net settlement.
             </ItemDescription>
-            <ItemActions>
-              <Link title="Learn more" href="/access">
-                Learn more
-                <CaretRight />
-              </Link>
-            </ItemActions>
           </ItemContent>
         </Item>
 
@@ -416,12 +407,6 @@ const CURRENCIES = [
               Grow revenue, expand currency coverage and unlock new payment
               corridors powered by USDT liquidity.
             </ItemDescription>
-            <ItemActions>
-              <Link title="Learn more" href="/access">
-                Learn more
-                <CaretRight />
-              </Link>
-            </ItemActions>
           </ItemContent>
         </Item>
 
@@ -437,12 +422,6 @@ const CURRENCIES = [
               Collect and pay out globally through a single API, simplifying
               treasury and reconciliation.
             </ItemDescription>
-            <ItemActions>
-              <Link title="Learn more" href="/access">
-                Learn more
-                <CaretRight />
-              </Link>
-            </ItemActions>
           </ItemContent>
         </Item>
       </ItemGroup>
@@ -555,16 +534,16 @@ const CURRENCIES = [
         size="lg"
         className="max-w-4xl text-6xl text-shadow-[0_12px_24px] text-shadow-black/30 max-md:text-5xl"
       >
-        Join the world's most liquid settlement network
+        Join the institutional stablecoin settlement network
       </SectionTitle>
 
       <Link
         href="/access"
-        title="Access the network"
+        title="Access the Network"
         variant="default"
         className="dark mt-4"
       >
-        Access the network
+        Access the Network
         <CaretRight />
       </Link>
     </SectionHeader>
