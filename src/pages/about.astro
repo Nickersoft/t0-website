@@ -48,41 +48,42 @@ const team = await getCollection("team").then((team) =>
   title="About Us"
   description="t-0 Network is on a mission to unlock a world of borderless economic connection."
 >
-  <Grid
-    columns="300px auto"
-    gap="none"
-    className="container mt-16 *:size-full *:border-b *:px-1 *:py-16 max-md:grid-cols-1 max-md:*:odd:border-b-0 max-md:*:odd:pb-0 max-md:*:even:pt-8"
-  >
-    <!----------------------------------- MISSION ---------------------------------->
+  <!----------------------------------- MISSION ---------------------------------->
 
-    <Typography variant="display" size="md"> Mission </Typography>
+  <Section className="flex flex-col items-start border-b pt-16 pb-12" container>
+    <SectionHeader align="left" className="mb-0 px-1">
+      <SectionTitle>Mission</SectionTitle>
+      <SectionDescription>
+        <strong>
+          We're on a mission to unlock a world of borderless economic
+          connection.
+        </strong> t-0 Network is building the financial infrastructure of a borderless
+        world, connecting banks, fintechs, and payment providers through seamless,
+        programmable money movement.
+      </SectionDescription>
+    </SectionHeader>
+  </Section>
 
-    <Typography variant="body" size="lg" color="secondary">
-      <strong>
-        We're our a mission unlock a world of borderless economic connection.
-      </strong> t-0 Network is building the financial infrastructure of a borderless
-      world, connecting banks, fintechs, and payment providers through seamless,
-      programmable money movement.
-    </Typography>
+  <!----------------------------------- COMPANY ---------------------------------->
 
-    <!----------------------------------- COMPANY ---------------------------------->
-
-    <Typography variant="display" size="md"> Company </Typography>
-
-    <Typography variant="body" size="lg" color="secondary">
-      <strong>
-        t-0 is the institutional settlement layer for stablecoin-powered
-        payments.
-      </strong> We connect licensed financial institutions through a single integration,
-      using USDT liquidity and patented net-settlement technology to simplify cross-border
-      transfers. Our system makes global payments feel local by enabling fast, programmable
-      value movement between developed and emerging markets.
-    </Typography>
-  </Grid>
+  <Section className="flex flex-col items-start border-b py-12" container>
+    <SectionHeader align="left" className="mb-0 px-1">
+      <SectionTitle>Company</SectionTitle>
+      <SectionDescription>
+        <strong>
+          t-0 is the institutional settlement layer for stablecoin-powered
+          payments.
+        </strong> We connect licensed financial institutions through a single integration,
+        using USDT liquidity and patented net-settlement technology to simplify cross-border
+        transfers. Our system makes global payments feel local by enabling fast,
+        programmable value movement between developed and emerging markets.
+      </SectionDescription>
+    </SectionHeader>
+  </Section>
 
   <!--------------------------------- TECHNOLOGY --------------------------------->
 
-  <Section className="flex flex-col items-start pb-12" container>
+  <Section className="flex flex-col items-start border-b py-12" container>
     <SectionHeader align="left" className="px-1">
       <SectionTitle>Technology</SectionTitle>
       <SectionDescription>
@@ -137,7 +138,7 @@ const team = await getCollection("team").then((team) =>
 
   <!--------------------------------- LEADERSHIP -------------------------------->
 
-  <Section>
+  <Section className="pt-12">
     <SectionHeader>
       <SectionTitle>Our Leadership Team</SectionTitle>
 

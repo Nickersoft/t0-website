@@ -52,7 +52,7 @@ export function Navigation() {
 
           <Stack orientation="row" align="center" gap="md">
             <Button className="max-[25rem]:hidden md:hidden">
-              Access network
+              Access The Network
             </Button>
 
             <MobileNavigation navigationHeight={height}>
@@ -70,7 +70,7 @@ export function Navigation() {
                   variant="default"
                   className="max-md:mt-2 max-md:w-full min-[25rem]:hidden md:block"
                 >
-                  Access network
+                  Access The Network
                 </NavigationItem>
               </ul>
             </MobileNavigation>
