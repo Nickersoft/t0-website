@@ -95,7 +95,7 @@ export function SectionDescription({
   return (
     <Typography
       color="secondary"
-      className={cn("max-w-4xl [text-align:inherit]", className)}
+      className={cn("max-w-4xl px-1 [text-align:inherit]", className)}
       variant="body"
       size="lg"
       {...props}

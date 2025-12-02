@@ -24,11 +24,16 @@ import {
   SectionTitle,
 } from "@/components/ui/Section";
 import { Stack } from "@/components/ui/Stack";
-import { Typography, typographyVariants } from "@/components/ui/Typography";
+import { Typography } from "@/components/ui/Typography";
 
 /* ---------------------------------- Icons --------------------------------- */
 
-import { GlobeDuotone, LightningDuotone, NetworkDuotone } from "@/icons";
+import {
+  GlobeDuotone,
+  LightningDuotone,
+  Linkedin,
+  NetworkDuotone,
+} from "@/icons";
 
 /* --------------------------------- Layout --------------------------------- */
 
@@ -38,7 +43,6 @@ import LegalLayout from "@/layouts/LegalLayout.astro";
 
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
-import { cn } from "@/lib/utils";
 
 const team = await getCollection("team").then((team) =>
   team.sort((a, b) => a.data.order - b.data.order),
@@ -178,17 +182,24 @@ const team = await getCollection("team").then((team) =>
             />
 
             <Stack centered gap="none">
-              <a
-                href={teamMember.data.linkedin}
-                class={cn(
-                  typographyVariants({ variant: "title", size: "lg" }),
-                  "hover:text-primary",
-                )}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Stack
+                orientation="row"
+                align="center"
+                gap="sm"
+                className="whitespace-nowrap"
               >
-                {teamMember.data.name}
-              </a>
+                <Typography variant="title" size="lg">
+                  {teamMember.data.name}
+                </Typography>
+                <a
+                  href={teamMember.data.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${teamMember.data.name} LinkedIn profile`}
+                >
+                  <Linkedin className="size-4" />
+                </a>
+              </Stack>
               <Typography variant="body" size="lg" color="secondary">
                 {teamMember.data.title}
               </Typography>
