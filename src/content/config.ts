@@ -16,6 +16,7 @@ const team = defineCollection({
       image: image(),
       name: z.string(),
       title: z.string(),
+      linkedin: z.string(),
     }),
 });
 

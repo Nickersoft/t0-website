@@ -89,8 +89,7 @@ function SVGGradient({
 }
 
 interface GradientIconProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
-    Omit<SVGGradientProps, "id"> {
+  extends React.HTMLAttributes<HTMLSpanElement>, Omit<SVGGradientProps, "id"> {
   children: React.ReactNode;
   asChild?: boolean;
 }

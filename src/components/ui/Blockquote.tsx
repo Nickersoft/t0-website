@@ -48,7 +48,7 @@ export function Blockquote({ children, ...props }: BlockquoteProps) {
       {...props}
       align="center"
       gap="lg"
-      className="text-center text-lg leading-relaxed"
+      className="text-left text-lg leading-relaxed"
       orientation="column"
     >
       {children}

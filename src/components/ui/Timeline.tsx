@@ -56,7 +56,10 @@ function TimelineItemLabel({
       color="secondary"
       size="md"
       {...props}
-      className={cn("group-data-[variant=primary]:text-primary/80", className)}
+      className={cn(
+        "group-data-[variant=primary]/tl:text-primary/80",
+        className,
+      )}
     >
       {children}
     </Typography>

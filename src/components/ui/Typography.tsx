@@ -217,7 +217,8 @@ const tagVariants = cva("", {
 });
 
 export interface TypographyProps
-  extends Omit<React.HTMLAttributes<HTMLParagraphElement>, "color">,
+  extends
+    Omit<React.HTMLAttributes<HTMLParagraphElement>, "color">,
     VariantProps<typeof typographyVariants> {
   asChild?: boolean;
 }

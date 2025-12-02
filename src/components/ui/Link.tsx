@@ -3,7 +3,8 @@ import type { ComponentPropsWithoutRef } from "react";
 import { Button, type buttonVariants } from "./Button";
 
 export interface LinkProps
-  extends Omit<ComponentPropsWithoutRef<"a">, "color">,
+  extends
+    Omit<ComponentPropsWithoutRef<"a">, "color">,
     VariantProps<typeof buttonVariants> {}
 
 export function Link({

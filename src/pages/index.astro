@@ -19,13 +19,13 @@ import Pipeline from "@/assets/svg/iso/pipeline.svg";
 import markets from "@/assets/png/markets.png";
 import transfers from "@/assets/png/global-transfers.png";
 import revenue from "@/assets/png/new-revenue.png";
-// import quote from "@/assets/png/quote.png";
+import quote from "@/assets/png/quote.png";
 import fx from "@/assets/png/fx-cost.png";
 
 import PageLayout from "@/layouts/PageLayout.astro";
 
 // UI Components
-// import { Blockquote, BlockquoteAuthor } from "@/components/ui/Blockquote";
+import { Blockquote, BlockquoteAuthor } from "@/components/ui/Blockquote";
 import {
   Card,
   CardDescription,
@@ -130,12 +130,12 @@ const CURRENCIES = [
         settlement network. Built for Institutions. Powered by USDT.
       </SectionDescription>
       <Link
-        title="Access The Network"
+        title="Access the Network"
         href="/access"
         variant="default"
         className="motion-safe:animate-in dark slide-in-from-bottom-25 fade-in fill-mode-both animation-duration-[1500ms] my-8 ease-out motion-safe:[animation-delay:500ms]"
       >
-        Access The Network
+        Access the Network
         <CaretRight />
       </Link>
       <Typography
@@ -278,7 +278,7 @@ const CURRENCIES = [
             <TimelineItem>
               <TimelineItemLabel> 1-3 Business Days </TimelineItemLabel>
               <TimelineItemTitle>
-                Receiving bank processes payment.
+                Receiving bank processes payment
               </TimelineItemTitle>
             </TimelineItem>
             <TimelineItem>
@@ -429,10 +429,10 @@ const CURRENCIES = [
   </Section>
 
   <!---------------------------------- QUOTATION --------------------------------->
-  <!-- Hidden until approved quote is available
+
   <Section>
     <Stack
-      className="mx-auto max-w-3xl px-6"
+      className="mx-auto max-w-2xl px-6"
       align="center"
       gap="none"
       orientation="column"
@@ -447,23 +447,24 @@ const CURRENCIES = [
       />
       <Blockquote>
         <blockquote>
-          USDT has become the world's leading stablecoin because it solves real
-          problems. Our investment makes T-0 the first network to prioritise
-          USDT liquidity for real-world settlement - <strong>
-            bringing compliant, programmable cross-border payments to
-            institutions, especially in emerging markets where stable, efficient
-            infrastructure matters most.
-          </strong>
+          At Tether, we believe financial freedom is key to everyone, but we
+          also think that, while essential, it should be equally accessible
+          through efficient, trusted infrastructure. The t-0 network aims to
+          solve real-world problems by combining Speed, Cost Efficiency, Global
+          Coverage, Scalability, and FX Transparency. We are happy to support
+          such a platform that drives real-world, innovative solutions for
+          individuals and institutions alike.
         </blockquote>
         <BlockquoteAuthor name="Paolo Ardoino" title="CEO of Tether" />
       </Blockquote>
     </Stack>
   </Section>
-  -->
 
   <!--------------------------------- CURRENCIES --------------------------------->
 
-  <Section className="mx-auto flex max-w-5xl flex-col justify-center px-6">
+  <Section
+    className="mx-auto flex max-w-5xl flex-col justify-center overflow-hidden px-6"
+  >
     <SectionHeader>
       <SectionTitle> Seamless movement between 1200+ FX pairs </SectionTitle>
       <SectionDescription>
@@ -540,11 +541,11 @@ const CURRENCIES = [
 
       <Link
         href="/access"
-        title="Access The Network"
+        title="Access the Network"
         variant="default"
         className="dark mt-4"
       >
-        Access The Network
+        Access the Network
         <CaretRight />
       </Link>
     </SectionHeader>

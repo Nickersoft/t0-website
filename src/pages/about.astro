@@ -24,7 +24,7 @@ import {
   SectionTitle,
 } from "@/components/ui/Section";
 import { Stack } from "@/components/ui/Stack";
-import { Typography } from "@/components/ui/Typography";
+import { Typography, typographyVariants } from "@/components/ui/Typography";
 
 /* ---------------------------------- Icons --------------------------------- */
 
@@ -38,6 +38,7 @@ import LegalLayout from "@/layouts/LegalLayout.astro";
 
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
+import { cn } from "@/lib/utils";
 
 const team = await getCollection("team").then((team) =>
   team.sort((a, b) => a.data.order - b.data.order),
@@ -57,9 +58,9 @@ const team = await getCollection("team").then((team) =>
         <strong>
           We're on a mission to unlock a world of borderless economic
           connection.
-        </strong> t-0 Network is building the financial infrastructure of a borderless
-        world, connecting banks, fintechs, and payment providers through seamless,
-        programmable money movement.
+        </strong> t-0 Network is building the financial infrastructure of a connected
+        world, linking banks, fintechs, and payment providers through seamless, efficient
+        money movement.
       </SectionDescription>
     </SectionHeader>
   </Section>
@@ -83,14 +84,14 @@ const team = await getCollection("team").then((team) =>
 
   <!--------------------------------- TECHNOLOGY --------------------------------->
 
-  <Section className="flex flex-col items-start border-b py-12" container>
+  <Section className="flex flex-col items-start border-b pt-12 pb-20" container>
     <SectionHeader align="left" className="px-1">
       <SectionTitle>Technology</SectionTitle>
       <SectionDescription>
         We designed t-0 from the ground-up to be the most efficient way for
         financial institutions to execute global correspondent payments. Our
         unique patent pending system brings together the best of traditional FX
-        trading infrastructure and stablecoin infrastructure:
+        trading infrastructure and stablecoin rails.
       </SectionDescription>
     </SectionHeader>
 
@@ -127,9 +128,9 @@ const team = await getCollection("team").then((team) =>
           <GlobeDuotone />
           <CardTitle> Settlement engine </CardTitle>
           <CardDescription>
-            A unified global ledger that records all transactions between
-            participating FIs, creating the world’s first system for continuous
-            net-settlement of stablecoin-based payments.
+            A global ledger that records transactions between participating
+            Financial Institutions, creating the world's first system for
+            continuous net-settlement of stablecoin-based payments.
           </CardDescription>
         </CardHeader>
       </Card>
@@ -177,9 +178,17 @@ const team = await getCollection("team").then((team) =>
             />
 
             <Stack centered gap="none">
-              <Typography variant="title" size="lg">
+              <a
+                href={teamMember.data.linkedin}
+                class={cn(
+                  typographyVariants({ variant: "title", size: "lg" }),
+                  "hover:text-primary",
+                )}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {teamMember.data.name}
-              </Typography>
+              </a>
               <Typography variant="body" size="lg" color="secondary">
                 {teamMember.data.title}
               </Typography>
